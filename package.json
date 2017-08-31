@@ -1,0 +1,54 @@
+{
+  "name": "react-responsive-spritesheet",
+  "description": "React component which helps you to easily apply responsive spritesheet animations on your project.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "https://github.com/danilosetra/react-responsive-spritesheet#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danilosetra/react-responsive-spritesheet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danilosetra/react-responsive-spritesheet/issues"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "responsive",
+    "responsiveness",
+    "component",
+    "module",
+    "sprite",
+    "sprites",
+    "spritesheet",
+    "animated",
+    "animation",
+    "sequence"
+  ],
+  "main": "build/index.js",
+  "author": {
+    "name": "Danilo Setra",
+    "email": "danilosetra@gmail.com"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch",
+    "build": "webpack"
+  },
+  "peerDependencies": {
+    "react": "^15.5.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.5.1"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "webpack": "^2.6.1"
+  }
+}

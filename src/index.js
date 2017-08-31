@@ -91,11 +91,9 @@ class Spritesheet extends React.Component {
 
   moveImage(play = true) {
     if (this.props.direction === 'vertical') {
-      this.spriteElMove.style.backgroundPositionY = `-${this.props.heightFrame *
-        this.actFrame}px`;
+      this.spriteElMove.style.backgroundPosition = `0 -${this.props.heightFrame * this.actFrame}px`;
     } else {
-      this.spriteElMove.style.backgroundPositionX = `-${this.props.widthFrame *
-        this.actFrame}px`;
+      this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * this.actFrame}px 0`;
     }
 
     if (play) {

@@ -22,8 +22,6 @@ class App extends Component {
             className={`my-element__class--style`}
             style={{ backgroundColor: 'red' }}
             image={`http://www.example.com/assets/image.png`}
-            width={`50%`}
-            height={`100%`}
             widthFrame={800}
             heightFrame={648}
             steps={46}
@@ -56,10 +54,8 @@ render(<App />, document.getElementById('root'));
 |   | **className** | `string` | 'my-element__class--style' | *Apply a classname for spritehseet container* |
 |   | **style** | `object` | { backgroundColor: 'red', display: 'flex' } | *Apply inline style for spritehseet container* |
 | &#10003; | **image** | `string` | 'http://yyy.com/image.png' | *URL or path for image to animate* |
-|   | **width** | `string` | '86%' | *Final rendered spritesheet width* |
-|   | **height** | `string` | '100%' | *Final rendered spritesheet height* |
 | &#10003; | **widthFrame** | `number` | 800 | *Original width of each frame, in pixels* |
-| &#10003; | **widthFrame** | `number` | 800 | *Original width of each frame, in pixels* |
+| &#10003; | **heightFrame** | `number` | 800 | *Original height of each frame, in pixels* |
 | &#10003; | **steps** | `number` | 47 | *Total frames / steps animation* |
 | &#10003; | **fps** | `number` | 12 | *Velocity / Animation frames per second* |
 | &#10003; | **direction** | `string` | 'horizontal' | *'horizontal' or 'vertical' frames direction positioning at sprite image* |

@@ -16,11 +16,6 @@ class Spritesheet extends React.Component {
   }
 
   renderElements() {
-    let spriteStyles = {
-      width: this.props.width,
-      height: this.props.height
-    }
-
     let containerBackgroundImage = '';
     let containerBackgroundSize = '';
     let containerBackgroundRepeat = '';
@@ -57,7 +52,7 @@ class Spritesheet extends React.Component {
 
     let elMove = React.createElement('div', { className: 'react-responsive-spritesheet-container__move', style: moveStyles });
     let elContainer = React.createElement('div', { className: 'react-responsive-spritesheet-container', style: containerStyles }, elMove);
-    let elSprite = React.createElement('div', { className: `react-responsive-spritesheet ${this.spriteID} ${this.props.className ? this.props.className : ''}`, style: Object.assign(spriteStyles, this.props.style) }, elContainer);
+    let elSprite = React.createElement('div', { className: `react-responsive-spritesheet ${this.spriteID} ${this.props.className ? this.props.className : ''}`, style: this.props.style }, elContainer);
 
     return elSprite;
   }
@@ -149,8 +144,6 @@ Spritesheet.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   image: PropTypes.string.isRequired,
-  width: PropTypes.number,
-  height: PropTypes.number,
   widthFrame: PropTypes.number.isRequired,
   heightFrame: PropTypes.number.isRequired,
   steps: PropTypes.number.isRequired,

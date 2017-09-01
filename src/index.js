@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class spritesheet extends React.Component {
+class Spritesheet extends React.Component {
   constructor(props) {
     super(props);
 
@@ -145,7 +145,7 @@ class spritesheet extends React.Component {
   }
 }
 
-spritesheet.propTypes = {
+Spritesheet.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   image: PropTypes.string.isRequired,
@@ -167,4 +167,4 @@ spritesheet.propTypes = {
   frameByFrame: PropTypes.bool
 };
 
-export default spritesheet;
+export default Spritesheet;

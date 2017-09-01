@@ -1,4 +1,6 @@
 var path = require('path');
+var webpack = require('webpack');
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -6,6 +8,11 @@ module.exports = {
     filename: 'index.js',
     libraryTarget: 'commonjs2'
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    })
+  ],
   module: {
     rules: [
       {

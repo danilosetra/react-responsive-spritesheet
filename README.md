@@ -51,13 +51,14 @@ render(<App />, document.getElementById('root'));
 
 ### Options
 
-| dsasad  |   |
-| ------------ | ------------ |
-|   |   |
-|   |  adsasd|
+| dsasad  |   |   |   |   |   |
+| ------------ | ------------ |   |   |   |   |
+|   |   |   |   |   |   |
+|   |  adsasd|   |   |   |   |
+| | **className** | `string` | ---- | 'my-element__class--style' | *Apply a classname for spritehseet container* |
 
 |Required|Parameter|Type|Default|Example|Description|
-|:-:|:-|:-|:-|:-|
+|:------------:|:------------|:------------|:------------|:------------|
 | | **className** | `string` | ---- | 'my-element__class--style' | *Apply a classname for spritehseet container* |
 | | **style** | `object` | ---- | { backgroundColor: 'red', display: 'flex' } | *Apply inline style for spritehseet container* |
 |&#10003;| **image** | `string` | ---- | 'http://www.example.com/assets/image.png' | *URL or path for image to animate* |

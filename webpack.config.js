@@ -8,11 +8,6 @@ module.exports = {
     filename: 'index.js',
     libraryTarget: 'commonjs2'
   },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    })
-  ],
   module: {
     rules: [
       {
@@ -30,5 +25,10 @@ module.exports = {
   },
   externals: {
     'react': 'commonjs react'
-  }
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    })
+  ]
 };

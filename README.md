@@ -55,7 +55,6 @@ render(<App />, document.getElementById('root'));
 | ------------ | ------------ |   |   |   |   |
 |   |   |   |   |   |   |
 |   |  adsasd|   |   |   |   |
-| | className | string |  | my-element__class--style | Apply a classname for spritehseet container |
 
 
 sad213332132dsadsa

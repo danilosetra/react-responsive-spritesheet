@@ -27,8 +27,21 @@ module.exports = {
     'react': 'commonjs react'
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
     new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
+      minimize: true,
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        screw_ie8: true
+      },
+      comments: false
     })
   ]
 };

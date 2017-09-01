@@ -9,7 +9,7 @@ module.exports = {
     libraryTarget: 'commonjs2'
   },
   plugins: [
-    new MinifyPlugin()
+    new MinifyPlugin({},{comments:false})
   ],
   module: {
     rules: [

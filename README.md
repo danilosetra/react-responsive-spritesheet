@@ -55,6 +55,7 @@ render(<App />, document.getElementById('root'));
 | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
 |   | **className** | `string` |   | 'my-element__class--style' | *Apply a classname for spritehseet container* |
 |   | **style** | `object` |   | { backgroundColor: 'red', display: 'flex' } | *Apply inline style for spritehseet container* |
+| &#10003; | **image** | `string` |   | 'http://www.example.com/assets/image.png' | *URL or path for image to animate* |
 |   |   |   |   |   |   |
 |   |   |   |   |   |   |
 |   |   |   |   |   |   |
@@ -72,27 +73,26 @@ render(<App />, document.getElementById('root'));
 |   |   |   |   |   |   |
 |   |   |   |   |   |   |
 |   |   |   |   |   |   |
-|   |   |   |   |   | wqe  |
+|   |   |   |   |   | wqe |
 
 
 sad213332132dsadsa
 
-|||||||
-|:------------:|:------------|:------------|:------------|:------------|
-| |  |  | ---- |  |  |
-|&#10003;| **image** | `string` | ---- | 'http://www.example.com/assets/image.png' | *URL or path for image to animate* |
-| | **width** | `string` | ---- | '86%' | *Final rendered spritesheet width*
-| | **height** | `string` | ---- | '100%' | *Final rendered spritesheet height*
-|&#10003;| **widthFrame** | `number` | ---- | 800 | *Original width of each frame, in pixels*
-|&#10003;| **widthFrame** | `number` | ---- | 800 | *Original width of each frame, in pixels*
-|&#10003;| **steps** | `number` | ---- | 47 | *Total frames / steps animation*
-|&#10003;| **fps** | `number` | ---- | 12 | *Velocity / Animation frames per second*
-|&#10003;| **direction** | `string` | ---- | 'horizontal' | *'horizontal' or 'vertical' frames direction positioning at sprite image*
-| | **timeout** | `number` | 0 | 1200 | *Delay for start animating. The '**autoplay**' option must be **true***
-| | **autoplay** | `boolean` | false | ---- | *Determines if animation starts automatically*
-| | **loop** | `boolean` | false | ---- | *Determines if animation replay on end*
-| | **background** | `string` | ---- | 'http://www.example.com/assets/background.png' | *URL or path for background image placed behind animation*
-| | **backgroundSize** | `string` | ---- | 'cover' | *Style for background image*
-| | **backgroundRepeat** | `string` | ---- | 'no-repeat' | *Style for background image*
-| | **backgroundPosition** | `string` | ---- | 'center center' | *Style for background image*
-| | **getInstance** | `callback` | ---- | | *Return callback instance for spritesheet controls*
+
+| Required | Parameter | Type | Default | Example | Description |
+| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
+|   | **width** | `string` |   | '86%' | *Final rendered spritesheet width*
+|   | **height** | `string` |   | '100%' | *Final rendered spritesheet height*
+| &#10003; | **widthFrame** | `number` |   | 800 | *Original width of each frame, in pixels*
+| &#10003; | **widthFrame** | `number` |   | 800 | *Original width of each frame, in pixels*
+| &#10003; | **steps** | `number` |   | 47 | *Total frames / steps animation*
+| &#10003; | **fps** | `number` |   | 12 | *Velocity / Animation frames per second*
+| &#10003; | **direction** | `string` |   | 'horizontal' | *'horizontal' or 'vertical' frames direction positioning at sprite image*
+|   | **timeout** | `number` | 0 | 1200 | *Delay for start animating. The '**autoplay**' option must be **true***
+|   | **autoplay** | `boolean` | false |   | *Determines if animation starts automatically*
+|   | **loop** | `boolean` | false |   | *Determines if animation replay on end*
+|   | **background** | `string` |   | 'http://www.example.com/assets/background.png' | *URL or path for background image placed behind animation*
+|   | **backgroundSize** | `string` |   | 'cover' | *Style for background image*
+|   | **backgroundRepeat** | `string` |   | 'no-repeat' | *Style for background image*
+|   | **backgroundPosition** | `string` |   | 'center center' | *Style for background image*
+|   | **getInstance** | `callback` |   | | *Return callback instance for spritesheet controls*

@@ -55,10 +55,10 @@ render(<App />, document.getElementById('root'));
 | ------------ | ------------ |   |   |   |   |
 |   |   |   |   |   |   |
 |   |  adsasd|   |   |   |   |
-| | className | string | ---- | 'my-element__class--style' | Apply a classname for spritehseet container |
+| | className | string |  | my-element__class--style | Apply a classname for spritehseet container |
 
 
-saddsadsa
+sad213332132dsadsa
 
 |Required|Parameter|Type|Default|Example|Description|
 |:------------:|:------------|:------------|:------------|:------------|

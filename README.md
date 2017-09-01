@@ -66,7 +66,7 @@ render(<App />, document.getElementById('root'));
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
 |   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |
 |   | **loop** | `boolean` | false | *Determines if animation replay on end* |
-|   | **background** | `string` | 'http://yyy.com/background.png' | *URL or path for background image placed behind animation* |
+|   | **background** | `string` | '/assets/background.png' | *URL or path for background image placed behind animation* |
 |   | **backgroundSize** | `string` | 'cover' | *Style for background image* |
 |   | **backgroundRepeat** | `string` | 'no-repeat' | *Style for background image* |
 |   | **backgroundPosition** | `string` | 'center center' | *Style for background image* |

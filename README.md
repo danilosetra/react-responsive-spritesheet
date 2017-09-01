@@ -52,7 +52,7 @@ render(<App />, document.getElementById('root'));
 ### Options
 
 | Required | Parameter | Type | Example | Description |
-| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
 |   | **className** | `string` | 'my-element__class--style' | *Apply a classname for spritehseet container* |
 |   | **style** | `object` | { backgroundColor: 'red', display: 'flex' } | *Apply inline style for spritehseet container* |
 | &#10003; | **image** | `string` | 'http://yyy.com/image.png' | *URL or path for image to animate* |
@@ -62,10 +62,6 @@ render(<App />, document.getElementById('root'));
 | &#10003; | **widthFrame** | `number` | 800 | *Original width of each frame, in pixels* |
 | &#10003; | **steps** | `number` | 47 | *Total frames / steps animation* |
 | &#10003; | **fps** | `number` | 12 | *Velocity / Animation frames per second* |
-
-dsasddasdasdsa
-
-| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
 | &#10003; | **direction** | `string` | 'horizontal' | *'horizontal' or 'vertical' frames direction positioning at sprite image* |
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
 |   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |

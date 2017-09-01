@@ -51,7 +51,7 @@ render(<App />, document.getElementById('root'));
 
 ### Options
 
-| Required | Parameter | Type | Example/Default | Description |
+| Required | Parameter | Type | Example | Description |
 | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
 |   | **className** | `string` | 'my-element__class--style' | *Apply a classname for spritehseet container* |
 |   | **style** | `object` | { backgroundColor: 'red', display: 'flex' } | *Apply inline style for spritehseet container* |
@@ -64,8 +64,8 @@ render(<App />, document.getElementById('root'));
 | &#10003; | **fps** | `number` | 12 | *Velocity / Animation frames per second* |
 | &#10003; | **direction** | `string` | 'horizontal' | *'horizontal' or 'vertical' frames direction positioning at sprite image* |
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
-|   | **autoplay** | `boolean` | Default: false | *Determines if animation starts automatically* |
-|   | **loop** | `boolean` | Default: false | *Determines if animation replay on end* |
+|   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |
+|   | **loop** | `boolean` | false | *Determines if animation replay on end* |
 |   | **background** | `string` | 'http://yyy.com/background.png' | *URL or path for background image placed behind animation* |
 |   | **backgroundSize** | `string` | 'cover' | *Style for background image* |
 |   | **backgroundRepeat** | `string` | 'no-repeat' | *Style for background image* |

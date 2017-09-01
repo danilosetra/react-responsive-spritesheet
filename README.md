@@ -51,6 +51,11 @@ render(<App />, document.getElementById('root'));
 
 ### Options
 
+| dsasad  |   |
+| ------------ | ------------ |
+|   |   |
+|   |  adsasd|
+
 |Required|Parameter|Type|Default|Example|Description|
 |:-:|:-|:-|:-|:-|
 | | **className** | `string` | ---- | 'my-element__class--style' | *Apply a classname for spritehseet container* |

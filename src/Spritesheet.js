@@ -5,7 +5,7 @@ class Spritesheet extends React.Component {
   constructor(props) {
     super(props);
 
-    this.spriteID = 'ds-spritesheetplay--' + Math.random().toString(36).substring(7);
+    this.spriteID = 'react-responsive-spritesheet--' + Math.random().toString(36).substring(7);
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.intervalSprite = null;
     this.actFrame = 0;
     this.isPlaying = false;
@@ -55,9 +55,9 @@ class Spritesheet extends React.Component {
       transformOrigin: '0 50%'
     }
 
-    let elMove = React.createElement('div', { className: 'ds-spritesheetplay-container__move', style: moveStyles });
-    let elContainer = React.createElement('div', { className: 'ds-spritesheetplay-container', style: containerStyles }, elMove);
-    let elSprite = React.createElement('div', { className: `ds-spritesheetplay ${this.spriteID} ${this.props.className ? this.props.className : ''}`, style: Object.assign(spriteStyles, this.props.style) }, elContainer);
+    let elMove = React.createElement('div', { className: 'react-responsive-spritesheet-container__move', style: moveStyles });
+    let elContainer = React.createElement('div', { className: 'react-responsive-spritesheet-container', style: containerStyles }, elMove);
+    let elSprite = React.createElement('div', { className: `react-responsive-spritesheet ${this.spriteID} ${this.props.className ? this.props.className : ''}`, style: Object.assign(spriteStyles, this.props.style) }, elContainer);
 
     return elSprite;
   }
@@ -65,8 +65,8 @@ class Spritesheet extends React.Component {
   init() {
     this.actFrame = 0;
     this.spriteEl = document.querySelector('.' + this.spriteID);
-    this.spriteElContainer = this.spriteEl.querySelector('.ds-spritesheetplay-container');
-    this.spriteElMove = this.spriteElContainer.querySelector('.ds-spritesheetplay-container__move');
+    this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
+    this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
 
     this.resize();
     window.addEventListener('resize', this.resize.bind(this));

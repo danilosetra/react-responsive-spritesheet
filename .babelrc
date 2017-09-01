@@ -1,5 +1,5 @@
 {
-  "presets": [["es2015", { "modules": false }], "es2017", "stage-3", "react"],
+  "presets": ["minify"],
   "plugins": [
     "transform-object-rest-spread",
     "transform-react-jsx"

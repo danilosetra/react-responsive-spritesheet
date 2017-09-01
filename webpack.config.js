@@ -1,4 +1,6 @@
 var path = require('path');
+var MinifyPlugin = require("babel-minify-webpack-plugin");
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -6,6 +8,9 @@ module.exports = {
     filename: 'index.js',
     libraryTarget: 'commonjs2'
   },
+  plugins: [
+    new MinifyPlugin()
+  ],
   module: {
     rules: [
       {

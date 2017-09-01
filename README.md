@@ -51,9 +51,9 @@ render(<App />, document.getElementById('root'));
 
 ### Options
 
-|  ewqew |   |   |   |   |   |
+| Required | Parameter | Type | Default | Example | Description |
 | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
-|   |   |   |   |   |   |
+|   | **className** | `string` |   | 'my-element__class--style' | *Apply a classname for spritehseet container* |
 |   |   |   |   |   |   |
 |   |   |   |   |   |   |
 |   |   |   |   |   |   |
@@ -76,9 +76,9 @@ render(<App />, document.getElementById('root'));
 
 sad213332132dsadsa
 
-|Required|Parameter|Type|Default|Example|Description|
+|||||||
 |:------------:|:------------|:------------|:------------|:------------|
-| | **className** | `string` | ---- | 'my-element__class--style' | *Apply a classname for spritehseet container* |
+| |  |  | ---- |  |  |
 | | **style** | `object` | ---- | { backgroundColor: 'red', display: 'flex' } | *Apply inline style for spritehseet container* |
 |&#10003;| **image** | `string` | ---- | 'http://www.example.com/assets/image.png' | *URL or path for image to animate* |
 | | **width** | `string` | ---- | '86%' | *Final rendered spritesheet width*

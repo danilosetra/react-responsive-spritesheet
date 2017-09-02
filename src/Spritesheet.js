@@ -75,7 +75,7 @@ class Spritesheet extends React.Component {
     }, 100);
 
     if (this.props.autoplay !== false) {
-      this.play();
+      this.play(true);
     }
 
     if (this.props.getInstance) {
@@ -99,7 +99,7 @@ class Spritesheet extends React.Component {
       this.frame += 1;
     }
   }
-  
+
   setInstance(){
     let instance = {
       play: this.play.bind(this),
@@ -108,7 +108,7 @@ class Spritesheet extends React.Component {
     this.props.getInstance(instance);
   }
 
-  play() {
+  play(withTimeout = false) {
     if (!this.isPlaying) {
       setTimeout(() => {
         this.intervalSprite = setInterval(() => {
@@ -122,7 +122,7 @@ class Spritesheet extends React.Component {
             }
           }
         }, 1000 / this.props.fps);
-      }, this.props.timeout ? this.props.timeout : 0);
+      }, withTimeout ? (this.props.timeout ? this.props.timeout : 0) : 0);
       this.isPlaying = true;
     }
   }

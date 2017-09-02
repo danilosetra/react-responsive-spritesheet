@@ -3,15 +3,15 @@
 
 React component which helps you to easily apply responsive spritesheet animations on your project.
 
-### Installation
+## Installation
 
 ```bash
 $ npm install react-responsive-spritesheet --save
 ```
 ---
-### Usage
+## Usage
 
-#####**Simple usage with required parameters**
+####**Simple usage with required parameters**
 
 ```javascript
 import Spritesheet from 'react-responsive-spritesheet';
@@ -34,7 +34,7 @@ class App extends Component {
 }
 ```
 
-#####**Complete usage with all parameters**
+####**Complete usage with all parameters**
 
 ```javascript
 import Spritesheet from 'react-responsive-spritesheet';
@@ -96,7 +96,7 @@ class App extends Component {
 }
 ```
 ---
-### Options
+## Options
 
 | Required | Parameter | Type | Example | Description |
 | :------------: | ------------ | ------------ | ------------ | ------------ |

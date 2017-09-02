@@ -36,6 +36,8 @@ class App extends Component {
             backgroundPosition={`center center`}
             getInstance={instance => {
                 this.spriteInstance = instance;
+            }}
+            onClick={() => {
                 this.spriteInstance.play();
             }}
         />
@@ -67,3 +69,4 @@ render(<App />, document.getElementById('root'));
 |   | **backgroundRepeat** | `string` | 'no-repeat' | *Style for background image* |
 |   | **backgroundPosition** | `string` | 'center center' | *Style for background image* |
 |   | **getInstance** | `callback` |   | *Return callback instance for spritesheet controls* |
+|   | **onClick** | `function` |   | *Provides action onClick for spritesheet container* |

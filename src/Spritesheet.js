@@ -54,7 +54,8 @@ class Spritesheet extends React.Component {
     let elContainer = React.createElement('div', { className: 'react-responsive-spritesheet-container', style: containerStyles }, elMove);
     let elSprite = React.createElement('div', {
       className: `react-responsive-spritesheet ${this.id} ${this.props.className ? this.props.className : ''}`,
-      style: this.props.style
+      style: this.props.style,
+      onClick: this.clickHandler.bind(this)
     }, elContainer);
 
     return elSprite;
@@ -78,7 +79,7 @@ class Spritesheet extends React.Component {
     }
 
     if (this.props.getInstance) {
-      this.props.getInstance(this);
+      this.setInstance();
     }
   }
 
@@ -98,13 +99,13 @@ class Spritesheet extends React.Component {
       this.frame += 1;
     }
   }
-
-  playOneFrame() {
-    this.resize();
-    this.moveImage();
-    if (this.frame >= this.props.steps) {
-      this.frame = 0;
+  
+  setInstance(){
+    let instance = {
+      play: this.play.bind(this),
+      pause: this.pause.bind(this)
     }
+    this.props.getInstance(instance);
   }
 
   play() {
@@ -117,7 +118,7 @@ class Spritesheet extends React.Component {
             if (this.props.loop) {
               this.frame = 0;
             } else {
-              this.stop();
+              this.pause();
             }
           }
         }, 1000 / this.props.fps);
@@ -126,10 +127,18 @@ class Spritesheet extends React.Component {
     }
   }
 
-  stop() {
+  pause() {
     this.frame = this.props.steps - 1;
     this.isPlaying = false;
     clearInterval(this.intervalSprite);
+  }
+
+  clickHandler() {
+    if(this.props.onClick){
+      this.props.onClick();
+    } else {
+      alert('not set')
+    }
   }
 
   render() {
@@ -153,7 +162,8 @@ Spritesheet.propTypes = {
   backgroundSize: PropTypes.string,
   backgroundRepeat: PropTypes.string,
   backgroundPosition: PropTypes.string,
-  getInstance: PropTypes.func
+  getInstance: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export default Spritesheet;

@@ -8,8 +8,33 @@ React component which helps you to easily apply responsive spritesheet animation
 ```bash
 $ npm install react-responsive-spritesheet --save
 ```
-
+---
 ### Usage
+
+#####**Simple usage with required parameters**
+
+```javascript
+import Spritesheet from 'react-responsive-spritesheet';
+
+class App extends Component {
+
+  render() {
+    return (
+        <Spritesheet
+            image={`http://www.example.com/assets/image.png`}
+            widthFrame={800}
+            heightFrame={648}
+            steps={46}
+            fps={12}
+            direction={`horizontal`}
+        />
+    );
+  }
+  
+}
+```
+
+#####**Complete usage with all parameters**
 
 ```javascript
 import Spritesheet from 'react-responsive-spritesheet';
@@ -40,13 +65,37 @@ class App extends Component {
             onClick={() => {
                 this.spriteInstance.play();
             }}
+            onDoubleClick={() => {
+                this.spriteInstance.pause();
+            }}
+            onMouseMove={() => {
+                console.log('onMouseMove');
+            }}
+            onMouseEnter={() => {
+                console.log('onMouseEnter');
+            }}
+            onMouseLeave={() => {
+                console.log('onMouseLeave');
+            }}
+            onMouseOver={() => {
+                console.log('onMouseOver');
+            }}
+            onMouseOut={() => {
+                console.log('onMouseOut');
+            }}
+            onMouseDown={() => {
+                console.log('onMouseDown');
+            }}
+            onMouseUp={() => {
+                console.log('onMouseUp');
+            }}
         />
     );
   }
   
 }
 ```
-
+---
 ### Options
 
 | Required | Parameter | Type | Example | Description |
@@ -68,3 +117,11 @@ class App extends Component {
 |   | **backgroundPosition** | `string` | 'center center' | *Style for background image* |
 |   | **getInstance** | `callback` |   | *Return callback instance for spritesheet controls* |
 |   | **onClick** | `function` |   | *Provides action onClick for spritesheet container* |
+|   | **onDoubleClick** | `function` |   | *Provides action onDoubleClick for spritesheet container* |
+|   | **onMouseMove** | `function` |   | *Provides action onMouseMove for spritesheet container* |
+|   | **onMouseEnter** | `function` |   | *Provides action onMouseEnter for spritesheet container* |
+|   | **onMouseLeave** | `function` |   | *Provides action onMouseLeave for spritesheet container* |
+|   | **onMouseOver** | `function` |   | *Provides action onMouseOver for spritesheet container* |
+|   | **onMouseOut** | `function` |   | *Provides action onMouseOut for spritesheet container* |
+|   | **onMouseDown** | `function` |   | *Provides action onMouseDown for spritesheet container* |
+|   | **onMouseUp** | `function` |   | *Provides action onMouseUp for spritesheet container* |

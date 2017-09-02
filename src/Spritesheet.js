@@ -55,7 +55,15 @@ class Spritesheet extends React.Component {
     let elSprite = React.createElement('div', {
       className: `react-responsive-spritesheet ${this.id} ${this.props.className ? this.props.className : ''}`,
       style: this.props.style,
-      onClick: this.clickHandler.bind(this)
+      onClick: this.props.onClick ? this.props.onClick.bind() : null,
+      onDoubleClick: this.props.onDoubleClick ? this.props.onDoubleClick.bind() : null,
+      onMouseMove: this.props.onMouseMove ? this.props.onMouseMove.bind() : null,
+      onMouseEnter: this.props.onMouseEnter ? this.props.onMouseEnter.bind() : null,
+      onMouseLeave: this.props.onMouseLeave ? this.props.onMouseLeave.bind() : null,
+      onMouseOver: this.props.onMouseOver ? this.props.onMouseOver.bind() : null,
+      onMouseOut: this.props.onMouseOut ? this.props.onMouseOut.bind() : null,
+      onMouseDown: this.props.onMouseDown ? this.props.onMouseDown.bind() : null,
+      onMouseUp: this.props.onMouseUp ? this.props.onMouseUp.bind() : null
     }, elContainer);
 
     return elSprite;
@@ -132,15 +140,7 @@ class Spritesheet extends React.Component {
     this.isPlaying = false;
     clearInterval(this.intervalSprite);
   }
-
-  clickHandler() {
-    if(this.props.onClick){
-      this.props.onClick();
-    } else {
-      alert('not set')
-    }
-  }
-
+  
   render() {
     return this.renderElements();
   }

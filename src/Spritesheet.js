@@ -162,7 +162,15 @@ Spritesheet.propTypes = {
   backgroundRepeat: PropTypes.string,
   backgroundPosition: PropTypes.string,
   getInstance: PropTypes.func,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  onDoubleClick: PropTypes.func,
+  onMouseMove: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  onMouseOver: PropTypes.func,
+  onMouseOut: PropTypes.func,
+  onMouseDown: PropTypes.func,
+  onMouseUp: PropTypes.func
 };
 
 export default Spritesheet;

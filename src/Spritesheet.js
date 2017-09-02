@@ -136,11 +136,10 @@ class Spritesheet extends React.Component {
   }
 
   pause() {
-    this.frame = this.props.steps - 1;
     this.isPlaying = false;
     clearInterval(this.intervalSprite);
   }
-  
+
   render() {
     return this.renderElements();
   }

@@ -50,7 +50,7 @@ class App extends Component {
 ### Options
 
 | Required | Parameter | Type | Example | Description |
-| ------------ | ------------ | ------------ | ------------ | ------------ |
+| :------------: | ------------ | ------------ | ------------ | ------------ |
 |   | **className** | `string` | 'my-element__class--style' | *Apply a classname for spritehseet container* |
 |   | **style** | `object` | { backgroundColor: 'red', display: 'flex' } | *Apply inline style for spritehseet container* |
 | &#10003; | **image** | `string` | 'http://yyy.com/image.png' | *URL or path for image to animate* |

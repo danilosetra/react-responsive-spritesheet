@@ -111,7 +111,9 @@ class Spritesheet extends React.Component {
   setInstance(){
     let instance = {
       play: this.play.bind(this),
-      pause: this.pause.bind(this)
+      pause: this.pause.bind(this),
+      goToAndPlay: this.goToAndPlay.bind(this),
+      goToAndPause: this.goToAndPause.bind(this)
     }
     this.props.getInstance(instance);
   }
@@ -138,6 +140,17 @@ class Spritesheet extends React.Component {
   pause() {
     this.isPlaying = false;
     clearInterval(this.intervalSprite);
+  }
+
+  goToAndPlay(frame = 0){
+    this.frame = frame;
+    this.play();
+  }
+
+  goToAndPause(frame = 0){
+    this.pause();
+    this.frame = frame;
+    this.moveImage();
   }
 
   render() {

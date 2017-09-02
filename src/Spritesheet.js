@@ -5,9 +5,9 @@ class Spritesheet extends React.Component {
   constructor(props) {
     super(props);
 
-    this.spriteID = 'react-responsive-spritesheet--' + Math.random().toString(36).substring(7);
+    this.id = 'react-responsive-spritesheet--' + Math.random().toString(36).substring(7);
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.intervalSprite = null;
-    this.actFrame = 0;
+    this.frame = 0;
     this.isPlaying = false;
   }
 
@@ -52,14 +52,17 @@ class Spritesheet extends React.Component {
 
     let elMove = React.createElement('div', { className: 'react-responsive-spritesheet-container__move', style: moveStyles });
     let elContainer = React.createElement('div', { className: 'react-responsive-spritesheet-container', style: containerStyles }, elMove);
-    let elSprite = React.createElement('div', { className: `react-responsive-spritesheet ${this.spriteID} ${this.props.className ? this.props.className : ''}`, style: this.props.style }, elContainer);
+    let elSprite = React.createElement('div', {
+      className: `react-responsive-spritesheet ${this.id} ${this.props.className ? this.props.className : ''}`,
+      style: this.props.style
+    }, elContainer);
 
     return elSprite;
   }
 
   init() {
-    this.actFrame = 0;
-    this.spriteEl = document.querySelector('.' + this.spriteID);
+    this.frame = 0;
+    this.spriteEl = document.querySelector('.' + this.id);
     this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
     this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
 
@@ -70,8 +73,8 @@ class Spritesheet extends React.Component {
       this.resize();
     }, 100);
 
-    if (this.props.autoplay) {
-      this.play(false);
+    if (this.props.autoplay !== false) {
+      this.play();
     }
 
     if (this.props.getInstance) {
@@ -86,53 +89,47 @@ class Spritesheet extends React.Component {
 
   moveImage(play = true) {
     if (this.props.direction === 'vertical') {
-      this.spriteElMove.style.backgroundPosition = `0 -${this.props.heightFrame * this.actFrame}px`;
+      this.spriteElMove.style.backgroundPosition = `0 -${this.props.heightFrame * this.frame}px`;
     } else {
-      this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * this.actFrame}px 0`;
+      this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * this.frame}px 0`;
     }
 
     if (play) {
-      this.actFrame += 1;
+      this.frame += 1;
     }
   }
 
   playOneFrame() {
     this.resize();
     this.moveImage();
-    if (this.actFrame >= this.props.steps) {
-      this.actFrame = 0;
+    if (this.frame >= this.props.steps) {
+      this.frame = 0;
     }
   }
 
-  play(withTimeout = true) {
+  play() {
     if (!this.isPlaying) {
       setTimeout(() => {
         this.intervalSprite = setInterval(() => {
           this.moveImage();
 
-          if (this.actFrame === this.props.steps) {
+          if (this.frame === this.props.steps) {
             if (this.props.loop) {
-              this.actFrame = 0;
+              this.frame = 0;
             } else {
               this.stop();
             }
           }
         }, 1000 / this.props.fps);
-      }, withTimeout ? (this.props.timeout ? this.props.timeout : 0) : 0);
+      }, this.props.timeout ? this.props.timeout : 0);
       this.isPlaying = true;
     }
   }
 
   stop() {
-    this.actFrame = this.props.steps - 1;
+    this.frame = this.props.steps - 1;
     this.isPlaying = false;
     clearInterval(this.intervalSprite);
-  }
-
-  clickAction() {
-    if (this.props.frameByFrame) {
-      this.playOneFrame();
-    }
   }
 
   render() {
@@ -156,8 +153,7 @@ Spritesheet.propTypes = {
   backgroundSize: PropTypes.string,
   backgroundRepeat: PropTypes.string,
   backgroundPosition: PropTypes.string,
-  getInstance: PropTypes.func,
-  frameByFrame: PropTypes.bool
+  getInstance: PropTypes.func
 };
 
 export default Spritesheet;

@@ -19,16 +19,18 @@ import Spritesheet from 'react-responsive-spritesheet';
 class App extends Component {
 
   render() {
+
     return (
         <Spritesheet
-            image={`http://www.example.com/assets/image.png`}
-            widthFrame={800}
-            heightFrame={648}
-            steps={46}
-            fps={12}
-            orientation={`horizontal`}
+          image={`http://www.example.com/assets/image.png`}
+          widthFrame={800}
+          heightFrame={648}
+          steps={46}
+          fps={12}
+          orientation={`horizontal`}
         />
     );
+
   }
 
 }
@@ -42,55 +44,57 @@ import Spritesheet from 'react-responsive-spritesheet';
 class App extends Component {
 
   render() {
+
     return (
         <Spritesheet
-            className={`my-element__class--style`}
-            style={{ backgroundColor: 'red' }}
-            image={`http://www.example.com/assets/image.png`}
-            widthFrame={800}
-            heightFrame={648}
-            steps={46}
-            fps={12}
-            orientation={`horizontal`}
-            timeout={1800}
-            autoplay={false}
-            loop={true}
-            background={`http://www.example.com/assets/image.png`}
-            backgroundSize={`cover`}
-            backgroundRepeat={`no-repeat`}
-            backgroundPosition={`center center`}
-            getInstance={instance => {
-                this.spriteInstance = instance;
-            }}
-            onClick={() => {
-                this.spriteInstance.play();
-            }}
-            onDoubleClick={() => {
-                this.spriteInstance.pause();
-            }}
-            onMouseMove={() => {
-                console.log('onMouseMove');
-            }}
-            onMouseEnter={() => {
-                console.log('onMouseEnter');
-            }}
-            onMouseLeave={() => {
-                console.log('onMouseLeave');
-            }}
-            onMouseOver={() => {
-                console.log('onMouseOver');
-            }}
-            onMouseOut={() => {
-                console.log('onMouseOut');
-            }}
-            onMouseDown={() => {
-                console.log('onMouseDown');
-            }}
-            onMouseUp={() => {
-                console.log('onMouseUp');
-            }}
+          className={`my-element__class--style`}
+          style={{ backgroundColor: 'red' }}
+          image={`http://www.example.com/assets/image.png`}
+          widthFrame={800}
+          heightFrame={648}
+          steps={46}
+          fps={12}
+          orientation={`horizontal`}
+          timeout={1800}
+          autoplay={false}
+          loop={true}
+          background={`http://www.example.com/assets/image.png`}
+          backgroundSize={`cover`}
+          backgroundRepeat={`no-repeat`}
+          backgroundPosition={`center center`}
+          getInstance={instance => {
+            this.spriteInstance = instance;
+          }}
+          onClick={() => {
+            this.spriteInstance.play();
+          }}
+          onDoubleClick={() => {
+            this.spriteInstance.pause();
+          }}
+          onMouseMove={() => {
+            console.log('onMouseMove');
+          }}
+          onMouseEnter={() => {
+            console.log('onMouseEnter');
+          }}
+          onMouseLeave={() => {
+            console.log('onMouseLeave');
+          }}
+          onMouseOver={() => {
+            console.log('onMouseOver');
+          }}
+          onMouseOut={() => {
+            console.log('onMouseOut');
+          }}
+          onMouseDown={() => {
+            console.log('onMouseDown');
+          }}
+          onMouseUp={() => {
+            console.log('onMouseUp');
+          }}
         />
     );
+
   }
 
 }

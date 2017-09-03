@@ -97,7 +97,7 @@ class Spritesheet extends React.Component {
   }
 
   moveImage(play = true) {
-    if (this.props.direction === 'vertical') {
+    if (this.props.orientation === 'vertical') {
       this.spriteElMove.style.backgroundPosition = `0 -${this.props.heightFrame * this.frame}px`;
     } else {
       this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * this.frame}px 0`;
@@ -166,7 +166,7 @@ Spritesheet.propTypes = {
   heightFrame: PropTypes.number.isRequired,
   steps: PropTypes.number.isRequired,
   fps: PropTypes.number.isRequired,
-  direction: PropTypes.string.isRequired,
+  orientation: PropTypes.string.isRequired,
   timeout: PropTypes.number,
   autoplay: PropTypes.bool,
   loop: PropTypes.bool,

@@ -26,7 +26,7 @@ class App extends Component {
             heightFrame={648}
             steps={46}
             fps={12}
-            direction={`horizontal`}
+            orientation={`horizontal`}
         />
     );
   }
@@ -51,7 +51,7 @@ class App extends Component {
             heightFrame={648}
             steps={46}
             fps={12}
-            direction={`horizontal`}
+            orientation={`horizontal`}
             timeout={1800}
             autoplay={false}
             loop={true}
@@ -92,7 +92,7 @@ class App extends Component {
         />
     );
   }
-  
+
 }
 ```
 ---
@@ -107,7 +107,7 @@ class App extends Component {
 | &#10003; | **heightFrame** | `number` | 800 | *Original height of each frame, in pixels* |
 | &#10003; | **steps** | `number` | 47 | *Total frames / steps animation* |
 | &#10003; | **fps** | `number` | 12 | *Velocity / Animation frames per second* |
-| &#10003; | **direction** | `string` | 'horizontal' | *'horizontal' or 'vertical' frames direction positioning at sprite image* |
+| &#10003; | **orientation** | `string` | 'horizontal' | *'horizontal' or 'vertical' frames orientation on sprite image* |
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
 |   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |
 |   | **loop** | `boolean` | false | *Determines if animation replay on end* |

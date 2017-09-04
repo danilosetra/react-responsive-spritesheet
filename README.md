@@ -8,6 +8,15 @@ React component which helps you to easily apply responsive spritesheet animation
 ```bash
 $ npm install react-responsive-spritesheet --save
 ```
+<!-- 
+npm run build
+npm publish < patch / minor / major >
+npm publish
+git add .
+git commit -m "npm version update"
+git push origin master
+git push origin < TAG_VERSION_NAME>
+-->
 ---
 ## Usage
 

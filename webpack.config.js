@@ -1,4 +1,6 @@
 var path = require('path');
+var MinifyPlugin = require("babel-minify-webpack-plugin");
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -6,6 +8,9 @@ module.exports = {
     filename: 'index.js',
     libraryTarget: 'commonjs2'
   },
+  plugins: [
+    new MinifyPlugin({},{comments:false})
+  ],
   module: {
     rules: [
       {
@@ -15,7 +20,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
+            presets: ['es2017', 'stage-3', 'react']
           }
         }
       }

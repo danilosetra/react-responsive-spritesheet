@@ -7,7 +7,7 @@ class Spritesheet extends React.Component {
 
     this.id = 'react-responsive-spritesheet--' + Math.random().toString(36).substring(7);
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.intervalSprite = null;
-    this.frame = 0;
+    this.frame = this.completeLoopCicles = 0;
     this.isPlaying = false;
   }
 
@@ -87,7 +87,7 @@ class Spritesheet extends React.Component {
     }
 
     if (this.props.getInstance) {
-      this.setInstance();
+      this.props.getInstance(this.setInstance());
     }
   }
 
@@ -109,13 +109,38 @@ class Spritesheet extends React.Component {
   }
 
   setInstance(){
-    let instance = {
+    return {
       play: this.play.bind(this),
       pause: this.pause.bind(this),
       goToAndPlay: this.goToAndPlay.bind(this),
-      goToAndPause: this.goToAndPause.bind(this)
+      goToAndPause: this.goToAndPause.bind(this),
+      getInfo: this.getInfo.bind(this)
+    };
+  }
+
+  getInfo(param){
+    switch(param){
+      case 'frame': {
+        return this.frame
+        break;
+      }
+      case 'isPlaying': {
+        return this.isPlaying
+        break;
+      }
+      case 'isPaused': {
+        return !this.isPlaying
+        break;
+      }
+      case 'completeLoopCicles': {
+        return this.completeLoopCicles
+        break;
+      }
+      default: {
+        console.error(`Invalid param \`${param}\` requested by Spritesheet.getinfo(). See the documentation on https://github.com/danilosetra/react-responsive-spritesheet`); 
+        break;
+      }
     }
-    this.props.getInstance(instance);
   }
 
   play(withTimeout = false) {
@@ -126,6 +151,7 @@ class Spritesheet extends React.Component {
 
           if (this.frame === this.props.steps) {
             if (this.props.loop) {
+              this.completeLoopCicles += 1;
               this.frame = 0;
             } else {
               this.pause();

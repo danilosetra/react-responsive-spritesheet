@@ -9,6 +9,7 @@ class Spritesheet extends React.Component {
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.intervalSprite = null;
     this.frame = this.completeLoopCicles = 0;
     this.isPlaying = false;
+    this.spriteScale = 1;
   }
 
   componentDidMount() {
@@ -32,6 +33,7 @@ class Spritesheet extends React.Component {
       overflow: 'hidden',
       width: `${this.props.widthFrame}px`,
       height: `${this.props.heightFrame}px`,
+      transform:`scale(${this.spriteScale})`,
       transformOrigin: '0 50%',
       backgroundImage: containerBackgroundImage,
       backgroundSize: containerBackgroundSize,
@@ -71,6 +73,8 @@ class Spritesheet extends React.Component {
 
   init() {
     this.frame = 0;
+    this.fps = this.props.fps;
+    this.steps = this.props.steps;
     this.spriteEl = document.querySelector('.' + this.id);
     this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
     this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
@@ -91,8 +95,8 @@ class Spritesheet extends React.Component {
   }
 
   resize(callback = true) {
-    let scaleSprite = this.spriteEl.offsetWidth / this.props.widthFrame;
-    this.spriteElContainer.style.transform = `scale(${scaleSprite})`;
+    this.spriteScale = this.spriteEl.offsetWidth / this.props.widthFrame;
+    this.spriteElContainer.style.transform = `scale(${this.spriteScale})`;
     if(callback && this.props.onResize) this.props.onResize(this.setInstance());
   }
 
@@ -130,20 +134,31 @@ class Spritesheet extends React.Component {
   getInfo(param){
     switch(param){
       case 'frame': {
-        return this.frame
-        break;
+        return this.frame;
+      }
+      case 'fps': {
+        return this.fps;
+      }
+      case 'steps': {
+        return this.steps;
+      }
+      case 'width': {
+        return this.spriteElContainer.getBoundingClientRect().width;
+      }
+      case 'height': {
+        return this.spriteElContainer.getBoundingClientRect().height;
+      }
+      case 'scale': {
+        return this.spriteScale;
       }
       case 'isPlaying': {
-        return this.isPlaying
-        break;
+        return this.isPlaying;
       }
       case 'isPaused': {
-        return !this.isPlaying
-        break;
+        return !this.isPlaying;
       }
       case 'completeLoopCicles': {
-        return this.completeLoopCicles
-        break;
+        return this.completeLoopCicles;
       }
       default: {
         console.error(`Invalid param \`${param}\` requested by Spritesheet.getinfo(). See the documentation on https://github.com/danilosetra/react-responsive-spritesheet`); 
@@ -159,7 +174,7 @@ class Spritesheet extends React.Component {
         this.intervalSprite = setInterval(() => {
           this.moveImage();
 
-          if (this.frame === this.props.steps) {
+          if (this.frame === this.steps) {
             if (this.props.loop) {
               if(this.props.onLoopComplete) this.props.onLoopComplete(this.setInstance());
               this.completeLoopCicles += 1;
@@ -168,7 +183,7 @@ class Spritesheet extends React.Component {
               this.pause();
             }
           }
-        }, 1000 / this.props.fps);
+        }, 1000 / this.fps);
       }, withTimeout ? (this.props.timeout ? this.props.timeout : 0) : 0);
       this.isPlaying = true;
     }

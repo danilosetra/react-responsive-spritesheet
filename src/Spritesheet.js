@@ -129,9 +129,9 @@ class Spritesheet extends React.Component {
       pause: this.pause.bind(this),
       goToAndPlay: this.goToAndPlay.bind(this),
       goToAndPause: this.goToAndPause.bind(this),
-      getInfo: this.getInfo.bind(this),
       setStartAt: this.setStartAt.bind(this),
-      setEndAt: this.setEndAt.bind(this)
+      setEndAt: this.setEndAt.bind(this),
+      getInfo: this.getInfo.bind(this)
     };
   }
 

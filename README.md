@@ -185,6 +185,29 @@ class App extends Component {
 |   | **onEnterFrame** | `array` |   | *Provides an array of callback functions when the specific animation frame is displayed* |
 
 ---
+## Call methods
+
+Using the instance provided on callback functions you can call some methods
+
+Example
+
+```
+onMouseEnter={spritesheet => {
+  console.log( spritesheet.setStartAt(6) );
+}}
+```
+
+| Method | Call | Description |
+| ------------ | ------------ | ------------ |
+| **play** | `spritesheet.play()` | Plays the animation from current frame |
+| **pause** | `spritesheet.pause()` | Pauses the animation on current frame |
+| **goToAndPlay** | `spritesheet.goToAndPlay(frameNumber)` | Plays the animation from specified frame as argument |
+| **goToAndPause** | `spritesheet.goToAndPause(frameNumber)` | Pauses the animation on specified frame |
+| **setStartAt** | `spritesheet.setStartAt(frameNumber)` | Sets the first frame to be displayed on animation starts. It will be considered on loop cycles. |
+| **setEndAt** | `spritesheet.setEndAt(frameNumber)` | Sets the last frame to be displayed on animation ends. It will be considered on loop cycles. |
+| **getInfo** | `spritesheet.getInfo('stringOfInfoToRetrieve')` | Returns some real-time information about spritesheet. See below on **[Requesting infos](#requesting-infos)** section |
+
+---
 ## Requesting infos
 
 Using the instance.getInfo(x) method provided on callback functions you can request a real-time information about your spritesheet animation

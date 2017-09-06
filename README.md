@@ -15,7 +15,7 @@ npm publish
 git add .
 git commit -m "npm version update"
 git push origin master
-git push origin < TAG_VERSION_NAME>
+git push origin < TAG_VERSION_NAME >
 -->
 ---
 ## Usage
@@ -145,9 +145,9 @@ class App extends Component {
 
 | Required | Parameter | Type | Example | Description |
 | :------------: | ------------ | ------------ | ------------ | ------------ |
-|   | **className** | `string` | 'my-element__class--style' | *Apply a classname for spritehseet container* |
-|   | **style** | `object` | { backgroundColor: 'red', display: 'flex' } | *Apply inline style for spritehseet container* |
-| &#10003; | **image** | `string` | 'http://yyy.com/image.png' | *URL or path for image to animate* |
+|   | **className** | `string` | 'my-element__class--style' | *Applies a classname for spritehseet container* |
+|   | **style** | `object` | { backgroundColor: 'red', display: 'flex' } | *Applies inline style for spritehseet container* |
+| &#10003; | **image** | `string` | 'http://yyy.com/image.png' | *URL or path of image to animate* |
 | &#10003; | **widthFrame** | `number` | 800 | *Original width of each frame, in pixels* |
 | &#10003; | **heightFrame** | `number` | 800 | *Original height of each frame, in pixels* |
 | &#10003; | **steps** | `number` | 47 | *Total frames / steps animation* |
@@ -156,7 +156,7 @@ class App extends Component {
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
 |   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |
 |   | **loop** | `boolean` | false | *Determines if animation replay on end* |
-|   | **background** | `string` | '/assets/background.png' | *URL or path for background image placed behind animation* |
+|   | **background** | `string` | '/assets/background.png' | *URL or path of background image placed behind animation* |
 |   | **backgroundSize** | `string` | 'cover' | *Style for background image* |
 |   | **backgroundRepeat** | `string` | 'no-repeat' | *Style for background image* |
 |   | **backgroundPosition** | `string` | 'center center' | *Style for background image* |
@@ -176,4 +176,29 @@ class App extends Component {
 |   | **onPause** | `function` |   | *Provides callback function when the spritesheet pauses. spritesheet.goToAndPause(x) method also fires this callback* |
 |   | **onLoopComplete** | `function` |   | *Provides callback function when the animation completes a loop cicle* |
 |   | **onEachFrame** | `function` |   | *Provides callback function when each animation frame is changed* |
-|   | **onEnterFrame** | `array` |   | *Provides an array of callback functions when specific animation frame is displayed* |
+|   | **onEnterFrame** | `array` |   | *Provides an array of callback functions when the specific animation frame is displayed* |
+
+---
+## Requesting infos
+
+Using the instance.getInfo(x) method provided on callback functions you can request a real-time information about your spritesheet animation
+
+Example
+
+```
+onMouseEnter={spritesheet => {
+  console.log( spritesheet.getInfo('frame') );
+}}
+```
+
+| Parameter | Type | Returns |
+| ------------ | ------------ | ------------ |
+| **frame** | `number` | current frame of animation |
+| **fps** | `number` | current frames per second (speed) |
+| **steps** | `number` | total number of animation steps |
+| **width** | `number` | scaled animation width, in pixels |
+| **height** | `number` | scaled animation height, in pixels |
+| **scale** | `number` | scale of spritesheet, based on default sizes, note that scale=1 is relative to original size |
+| **isPlaying** | `boolean` | if animation is currently playing, returns true |
+| **isPaused** | `boolean` | if animation is currently paused or stopped, returns true |
+| **completeLoopCicles** | `number` | total number of cycles (loops) the animation has completed |

@@ -30,14 +30,14 @@ class App extends Component {
   render() {
 
     return (
-        <Spritesheet
-          image={`http://www.example.com/assets/image.png`}
-          widthFrame={800}
-          heightFrame={648}
-          steps={46}
-          fps={12}
-          orientation={`horizontal`}
-        />
+      <Spritesheet
+        image={`http://www.example.com/assets/image.png`}
+        widthFrame={800}
+        heightFrame={648}
+        steps={46}
+        fps={12}
+        orientation={`horizontal`}
+      />
     );
 
   }
@@ -55,53 +55,85 @@ class App extends Component {
   render() {
 
     return (
-        <Spritesheet
-          className={`my-element__class--style`}
-          style={{ backgroundColor: 'red' }}
-          image={`http://www.example.com/assets/image.png`}
-          widthFrame={800}
-          heightFrame={648}
-          steps={46}
-          fps={12}
-          orientation={`horizontal`}
-          timeout={1800}
-          autoplay={false}
-          loop={true}
-          background={`http://www.example.com/assets/image.png`}
-          backgroundSize={`cover`}
-          backgroundRepeat={`no-repeat`}
-          backgroundPosition={`center center`}
-          getInstance={instance => {
-            this.spriteInstance = instance;
-          }}
-          onClick={() => {
-            this.spriteInstance.play();
-          }}
-          onDoubleClick={() => {
-            this.spriteInstance.pause();
-          }}
-          onMouseMove={() => {
-            console.log('onMouseMove');
-          }}
-          onMouseEnter={() => {
-            console.log('onMouseEnter');
-          }}
-          onMouseLeave={() => {
-            console.log('onMouseLeave');
-          }}
-          onMouseOver={() => {
-            console.log('onMouseOver');
-          }}
-          onMouseOut={() => {
-            console.log('onMouseOut');
-          }}
-          onMouseDown={() => {
-            console.log('onMouseDown');
-          }}
-          onMouseUp={() => {
-            console.log('onMouseUp');
-          }}
-        />
+      <Spritesheet
+        className={`my-element__class--style`}
+        style={{ backgroundColor: 'red' }}
+        image={`http://www.example.com/assets/image.png`}
+        widthFrame={800}
+        heightFrame={648}
+        steps={46}
+        fps={12}
+        orientation={`horizontal`}
+        timeout={1800}
+        autoplay={false}
+        loop={true}
+        background={`http://www.example.com/assets/image.png`}
+        backgroundSize={`cover`}
+        backgroundRepeat={`no-repeat`}
+        backgroundPosition={`center center`}
+        getInstance={spritesheet => {
+          this.spriteInstance = spritesheet;
+        }}
+        onClick={spritesheet => {
+          spritesheet.play();
+        }}
+        onDoubleClick={spritesheet => {
+          console.log( spritesheet.getInfo('isPlaying') );
+        }}
+        onMouseMove={spritesheet => {
+          console.log( 'onMouseMove', spritesheet.getInfo('frame') );
+        }}
+        onMouseEnter={spritesheet => {
+          console.log('onMouseEnter');
+        }}
+        onMouseLeave={spritesheet => {
+          console.log('onMouseLeave');
+        }}
+        onMouseOver={spritesheet => {
+          console.log('onMouseOver');
+        }}
+        onMouseOut={spritesheet => {
+          console.log('onMouseOut');
+        }}
+        onMouseDown={spritesheet => {
+          console.log('onMouseDown');
+        }}
+        onMouseUp={spritesheet => {
+          console.log('onMouseUp');
+        }}
+        onInit={spritesheet => {
+          console.log('onInit');
+        }}
+        onResize={spritesheet => {
+          console.log( 'onResize', spritesheet.getInfo('frame') );
+        }}
+        onPlay={spritesheet => {
+          console.log('onPlay');
+        }}
+        onPause={spritesheet => {
+          console.log('onPause');
+        }}
+        onLoopComplete={spritesheet => {
+          console.log('onLoopComplete');
+        }}
+        onEachFrame={spritesheet => {
+          console.log('onEachFrame');
+        }}
+        onEnterFrame={[
+          {
+            frame: 2,
+            callback: (() => {
+              console.log('passed by frame 2')
+            })
+          },
+          {
+            frame: 7,
+            callback: (() => {
+              console.log('passed by frame 7')
+            })
+          }
+        ]}
+      />
     );
 
   }
@@ -128,13 +160,20 @@ class App extends Component {
 |   | **backgroundSize** | `string` | 'cover' | *Style for background image* |
 |   | **backgroundRepeat** | `string` | 'no-repeat' | *Style for background image* |
 |   | **backgroundPosition** | `string` | 'center center' | *Style for background image* |
-|   | **getInstance** | `callback` |   | *Return callback instance for spritesheet controls* |
-|   | **onClick** | `function` |   | *Provides action onClick for spritesheet container* |
-|   | **onDoubleClick** | `function` |   | *Provides action onDoubleClick for spritesheet container* |
-|   | **onMouseMove** | `function` |   | *Provides action onMouseMove for spritesheet container* |
-|   | **onMouseEnter** | `function` |   | *Provides action onMouseEnter for spritesheet container* |
-|   | **onMouseLeave** | `function` |   | *Provides action onMouseLeave for spritesheet container* |
-|   | **onMouseOver** | `function` |   | *Provides action onMouseOver for spritesheet container* |
-|   | **onMouseOut** | `function` |   | *Provides action onMouseOut for spritesheet container* |
-|   | **onMouseDown** | `function` |   | *Provides action onMouseDown for spritesheet container* |
-|   | **onMouseUp** | `function` |   | *Provides action onMouseUp for spritesheet container* |
+|   | **getInstance** | `callback` |   | *Returns callback instance for spritesheet controls* |
+|   | **onClick** | `function` |   | *Provides onClick callback function for spritesheet container* |
+|   | **onDoubleClick** | `function` |   | *Provides onDoubleClick callback function for spritesheet container* |
+|   | **onMouseMove** | `function` |   | *Provides onMouseMove callback function for spritesheet container* |
+|   | **onMouseEnter** | `function` |   | *Provides onMouseEnter callback function for spritesheet container* |
+|   | **onMouseLeave** | `function` |   | *Provides onMouseLeave callback function for spritesheet container* |
+|   | **onMouseOver** | `function` |   | *Provides onMouseOver callback function for spritesheet container* |
+|   | **onMouseOut** | `function` |   | *Provides onMouseOut callback function for spritesheet container* |
+|   | **onMouseDown** | `function` |   | *Provides onMouseDown callback function for spritesheet container* |
+|   | **onMouseUp** | `function` |   | *Provides onMouseUp callback function for spritesheet container* |
+|   | **onInit** | `function` |   | *Provides callback function when the spritesheet initializes* |
+|   | **onResize** | `function` |   | *Provides callback function when the spritesheet resizes* |
+|   | **onPlay** | `function` |   | *Provides callback function when the spritesheet plays. spritesheet.goToAndPlay(x) method also fires this callback* |
+|   | **onPause** | `function` |   | *Provides callback function when the spritesheet pauses. spritesheet.goToAndPause(x) method also fires this callback* |
+|   | **onLoopComplete** | `function` |   | *Provides callback function when the animation completes a loop cicle* |
+|   | **onEachFrame** | `function` |   | *Provides callback function when each animation frame is changed* |
+|   | **onEnterFrame** | `array` |   | *Provides an array of callback functions when specific animation frame is displayed* |

@@ -55,15 +55,15 @@ class Spritesheet extends React.Component {
     let elSprite = React.createElement('div', {
       className: `react-responsive-spritesheet ${this.id} ${this.props.className ? this.props.className : ''}`,
       style: this.props.style,
-      onClick: this.props.onClick ? this.props.onClick.bind() : null,
-      onDoubleClick: this.props.onDoubleClick ? this.props.onDoubleClick.bind() : null,
-      onMouseMove: this.props.onMouseMove ? this.props.onMouseMove.bind() : null,
-      onMouseEnter: this.props.onMouseEnter ? this.props.onMouseEnter.bind() : null,
-      onMouseLeave: this.props.onMouseLeave ? this.props.onMouseLeave.bind() : null,
-      onMouseOver: this.props.onMouseOver ? this.props.onMouseOver.bind() : null,
-      onMouseOut: this.props.onMouseOut ? this.props.onMouseOut.bind() : null,
-      onMouseDown: this.props.onMouseDown ? this.props.onMouseDown.bind() : null,
-      onMouseUp: this.props.onMouseUp ? this.props.onMouseUp.bind() : null
+      onClick: this.props.onClick ? this.props.onClick.bind(this.setInstance(), this) : null,
+      onDoubleClick: this.props.onDoubleClick ? this.props.onDoubleClick.bind(this.setInstance(), this) : null,
+      onMouseMove: this.props.onMouseMove ? this.props.onMouseMove.bind(this.setInstance(), this) : null,
+      onMouseEnter: this.props.onMouseEnter ? this.props.onMouseEnter.bind(this.setInstance(), this) : null,
+      onMouseLeave: this.props.onMouseLeave ? this.props.onMouseLeave.bind(this.setInstance(), this) : null,
+      onMouseOver: this.props.onMouseOver ? this.props.onMouseOver.bind(this.setInstance(), this) : null,
+      onMouseOut: this.props.onMouseOut ? this.props.onMouseOut.bind(this.setInstance(), this) : null,
+      onMouseDown: this.props.onMouseDown ? this.props.onMouseDown.bind(this.setInstance(), this) : null,
+      onMouseUp: this.props.onMouseUp ? this.props.onMouseUp.bin(this.setInstance(), this) : null
     }, elContainer);
 
     return elSprite;

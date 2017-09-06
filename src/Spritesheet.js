@@ -7,8 +7,8 @@ class Spritesheet extends React.Component {
 
     this.id = 'react-responsive-spritesheet--' + Math.random().toString(36).substring(7);
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.intervalSprite = null;
-    this.startAt = this.props.startAt ? (this.props.startAt - 1) : 0;
-    this.endAt = this.props.endAt;
+    this.startAt = this.props.startAt ? this.setStartAt(this.props.startAt) : 0;
+    this.endAt = this.setEndAt(this.props.endAt);
     this.frame = this.startAt ? this.startAt : 0;
     this.fps = this.props.fps;
     this.steps = this.props.steps;
@@ -129,7 +129,9 @@ class Spritesheet extends React.Component {
       pause: this.pause.bind(this),
       goToAndPlay: this.goToAndPlay.bind(this),
       goToAndPause: this.goToAndPause.bind(this),
-      getInfo: this.getInfo.bind(this)
+      getInfo: this.getInfo.bind(this),
+      setStartAt: this.setStartAt.bind(this),
+      setEndAt: this.setEndAt.bind(this)
     };
   }
 
@@ -167,6 +169,16 @@ class Spritesheet extends React.Component {
         break;
       }
     }
+  }
+
+  setStartAt(frame){
+    this.startAt = frame - 1;
+    return this.startAt;
+  }
+
+  setEndAt(frame){
+    this.endAt = frame;
+    return this.endAt;
   }
 
   play(withTimeout = false) {

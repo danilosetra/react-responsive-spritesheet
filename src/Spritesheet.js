@@ -63,7 +63,7 @@ class Spritesheet extends React.Component {
       onMouseOver: this.props.onMouseOver ? this.props.onMouseOver.bind(this.setInstance(), this) : null,
       onMouseOut: this.props.onMouseOut ? this.props.onMouseOut.bind(this.setInstance(), this) : null,
       onMouseDown: this.props.onMouseDown ? this.props.onMouseDown.bind(this.setInstance(), this) : null,
-      onMouseUp: this.props.onMouseUp ? this.props.onMouseUp.bin(this.setInstance(), this) : null
+      onMouseUp: this.props.onMouseUp ? this.props.onMouseUp.bind(this.setInstance(), this) : null
     }, elContainer);
 
     return elSprite;
@@ -75,25 +75,25 @@ class Spritesheet extends React.Component {
     this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
     this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
 
-    this.resize();
+    this.resize(false);
     window.addEventListener('resize', this.resize.bind(this));
     this.moveImage(false);
     setTimeout(() => {
-      this.resize();
-    }, 100);
+      this.resize(false);
+    }, 10);
 
     if (this.props.autoplay !== false) {
       this.play(true);
     }
 
-    if (this.props.getInstance) {
-      this.props.getInstance(this.setInstance());
-    }
+    if (this.props.getInstance) this.props.getInstance(this.setInstance());
+    if (this.props.onInit) this.props.onInit(this.setInstance.bind(this));
   }
 
-  resize() {
+  resize(callback = true) {
     let scaleSprite = this.spriteEl.offsetWidth / this.props.widthFrame;
     this.spriteElContainer.style.transform = `scale(${scaleSprite})`;
+    if(callback && this.props.onResize) this.props.onResize(this.setInstance());
   }
 
   moveImage(play = true) {
@@ -103,8 +103,17 @@ class Spritesheet extends React.Component {
       this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * this.frame}px 0`;
     }
 
+    if(this.props.onEnterFrame){
+      this.props.onEnterFrame.map((frameAction, i) => {
+        if(frameAction.frame === this.frame && frameAction.callback){
+          frameAction.callback();
+        }
+      });
+    }
+
     if (play) {
       this.frame += 1;
+      if (this.props.onEachFrame) this.props.onEachFrame(this.setInstance.bind(this));
     }
   }
 
@@ -146,11 +155,13 @@ class Spritesheet extends React.Component {
   play(withTimeout = false) {
     if (!this.isPlaying) {
       setTimeout(() => {
+        if(this.props.onPlay) this.props.onPlay(this.setInstance());
         this.intervalSprite = setInterval(() => {
           this.moveImage();
 
           if (this.frame === this.props.steps) {
             if (this.props.loop) {
+              if(this.props.onLoopComplete) this.props.onLoopComplete(this.setInstance());
               this.completeLoopCicles += 1;
               this.frame = 0;
             } else {
@@ -166,6 +177,7 @@ class Spritesheet extends React.Component {
   pause() {
     this.isPlaying = false;
     clearInterval(this.intervalSprite);
+    if(this.props.onPause) this.props.onPause(this.setInstance());
   }
 
   goToAndPlay(frame = 0){
@@ -209,7 +221,14 @@ Spritesheet.propTypes = {
   onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func,
   onMouseDown: PropTypes.func,
-  onMouseUp: PropTypes.func
+  onMouseUp: PropTypes.func,
+  onInit: PropTypes.func,
+  onResize: PropTypes.func,
+  onPlay: PropTypes.func,
+  onPause: PropTypes.func,
+  onLoopComplete: PropTypes.func,
+  onEachFrame: PropTypes.func,
+  onEnterFrame: PropTypes.array
 };
 
 export default Spritesheet;

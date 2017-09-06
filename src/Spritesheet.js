@@ -10,7 +10,7 @@ class Spritesheet extends React.Component {
     this.startAt = this.props.startAt ? this.setStartAt(this.props.startAt) : 0;
     this.endAt = this.setEndAt(this.props.endAt);
     this.frame = this.startAt ? this.startAt : 0;
-    this.fps = this.props.fps;
+    this.fps = this.setFps(this.props.fps);
     this.steps = this.props.steps;
     this.completeLoopCicles = 0;
     this.isPlaying = false;
@@ -131,6 +131,7 @@ class Spritesheet extends React.Component {
       goToAndPause: this.goToAndPause.bind(this),
       setStartAt: this.setStartAt.bind(this),
       setEndAt: this.setEndAt.bind(this),
+      setFps: this.setFps.bind(this),
       getInfo: this.getInfo.bind(this)
     };
   }
@@ -179,6 +180,11 @@ class Spritesheet extends React.Component {
   setEndAt(frame){
     this.endAt = frame;
     return this.endAt;
+  }
+
+  setFps(fps){
+    this.fps = fps;
+    return this.fps;
   }
 
   play(withTimeout = false) {

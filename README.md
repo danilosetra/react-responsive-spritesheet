@@ -69,6 +69,8 @@ class App extends Component {
         timeout={1800}
         autoplay={false}
         loop={true}
+        startAt={10}
+        endAt={30}
         background={`http://www.example.com/assets/image.png`}
         backgroundSize={`cover`}
         backgroundRepeat={`no-repeat`}
@@ -152,12 +154,14 @@ class App extends Component {
 | &#10003; | **image** | `string` | 'http://yyy.com/image.png' | *URL or path of image to animate* |
 | &#10003; | **widthFrame** | `number` | 800 | *Original width of each frame, in pixels* |
 | &#10003; | **heightFrame** | `number` | 800 | *Original height of each frame, in pixels* |
-| &#10003; | **steps** | `number` | 47 | *Total frames / steps animation* |
+| &#10003; | **steps** | `number` | 47 | *Total frames / steps present on animation image* |
 | &#10003; | **fps** | `number` | 12 | *Velocity / Animation frames per second* |
 | &#10003; | **orientation** | `string` | 'horizontal' | *'horizontal' or 'vertical' frames orientation on sprite image* |
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
 |   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |
 |   | **loop** | `boolean` | false | *Determines if animation replay on end* |
+|   | **startAt** | `number` | false | *Determines the first frame which will be displayed on start to animate* |
+|   | **endAt** | `number` | false | *Determines the last frame which will be displayed on stop animation* |
 |   | **background** | `string` | '/assets/background.png' | *URL or path of background image placed behind animation* |
 |   | **backgroundSize** | `string` | 'cover' | *Style for background image* |
 |   | **backgroundRepeat** | `string` | 'no-repeat' | *Style for background image* |

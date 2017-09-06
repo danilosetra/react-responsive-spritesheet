@@ -7,7 +7,12 @@ class Spritesheet extends React.Component {
 
     this.id = 'react-responsive-spritesheet--' + Math.random().toString(36).substring(7);
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.intervalSprite = null;
-    this.frame = this.completeLoopCicles = 0;
+    this.startAt = this.props.startAt ? (this.props.startAt - 1) : 0;
+    this.endAt = this.props.endAt;
+    this.frame = this.startAt ? this.startAt : 0;
+    this.fps = this.props.fps;
+    this.steps = this.props.steps;
+    this.completeLoopCicles = 0;
     this.isPlaying = false;
     this.spriteScale = 1;
   }
@@ -72,9 +77,6 @@ class Spritesheet extends React.Component {
   }
 
   init() {
-    this.frame = 0;
-    this.fps = this.props.fps;
-    this.steps = this.props.steps;
     this.spriteEl = document.querySelector('.' + this.id);
     this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
     this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
@@ -117,7 +119,7 @@ class Spritesheet extends React.Component {
 
     if (play) {
       this.frame += 1;
-      if (this.props.onEachFrame) this.props.onEachFrame(this.setInstance.bind(this));
+      if (this.props.onEachFrame) this.props.onEachFrame(this.setInstance());
     }
   }
 
@@ -174,11 +176,11 @@ class Spritesheet extends React.Component {
         this.intervalSprite = setInterval(() => {
           this.moveImage();
 
-          if (this.frame === this.steps) {
+          if (this.frame === this.steps || this.frame === this.endAt) {
             if (this.props.loop) {
               if(this.props.onLoopComplete) this.props.onLoopComplete(this.setInstance());
               this.completeLoopCicles += 1;
-              this.frame = 0;
+              this.frame = this.startAt ? this.startAt : 0;
             } else {
               this.pause();
             }
@@ -223,6 +225,8 @@ Spritesheet.propTypes = {
   timeout: PropTypes.number,
   autoplay: PropTypes.bool,
   loop: PropTypes.bool,
+  startAt: PropTypes.number,
+  endAt: PropTypes.number,
   background: PropTypes.string,
   backgroundSize: PropTypes.string,
   backgroundRepeat: PropTypes.string,

@@ -205,7 +205,8 @@ onMouseEnter={spritesheet => {
 | **goToAndPause** | `spritesheet.goToAndPause(frameNumber)` | Pauses the animation on specified frame |
 | **setStartAt** | `spritesheet.setStartAt(frameNumber)` | Sets the first frame to be displayed on animation starts. It will be considered on loop cycles. |
 | **setEndAt** | `spritesheet.setEndAt(frameNumber)` | Sets the last frame to be displayed on animation ends. It will be considered on loop cycles. |
-| **getInfo** | `spritesheet.getInfo('stringOfInfoToRetrieve')` | Returns some real-time information about spritesheet. See below on **[Requesting infos](#requesting-infos)** section |
+| **setFps** | `spritesheet.setFps(fpsNumber)` | Sets the fps (speed) of animation, even while is playing |
+| **getInfo** | `spritesheet.getInfo('stringInfoToRetrieve')` | Returns some real-time information about spritesheet. See below on **[Requesting infos](#requesting-infos)** section |
 
 ---
 ## Requesting infos

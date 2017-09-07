@@ -6,7 +6,8 @@ class Spritesheet extends React.Component {
     super(props);
 
     this.id = 'react-responsive-spritesheet--' + Math.random().toString(36).substring(7);
-    this.spriteEl = this.spriteElContainer = this.spriteElMove = this.intervalSprite = null;
+    this.spriteEl = this.spriteElContainer = this.spriteElMove = null;
+    this.intervalSprite = false;
     this.startAt = this.props.startAt ? this.setStartAt(this.props.startAt) : 0;
     this.endAt = this.setEndAt(this.props.endAt);
     this.frame = this.startAt ? this.startAt : 0;
@@ -102,6 +103,25 @@ class Spritesheet extends React.Component {
     if(callback && this.props.onResize) this.props.onResize(this.setInstance());
   }
 
+  play(withTimeout = false, setNewInterval = false) {
+    if (!this.isPlaying) {
+      setTimeout(() => {
+        if(this.props.onPlay) this.props.onPlay(this.setInstance());
+        this.setIntervalPlayFunctions();
+        this.isPlaying = true;
+      }, withTimeout ? (this.props.timeout ? this.props.timeout : 0) : 0);
+    }
+  }
+
+  setIntervalPlayFunctions(){
+    if(this.intervalSprite) clearInterval(this.intervalSprite);
+    this.intervalSprite = setInterval(() => {
+      if (this.isPlaying) {
+        this.moveImage();
+      }
+    }, 1000 / this.fps);
+  }
+
   moveImage(play = true) {
     if (this.props.orientation === 'vertical') {
       this.spriteElMove.style.backgroundPosition = `0 -${this.props.heightFrame * this.frame}px`;
@@ -121,18 +141,50 @@ class Spritesheet extends React.Component {
       this.frame += 1;
       if (this.props.onEachFrame) this.props.onEachFrame(this.setInstance());
     }
+
+    if(this.isPlaying){
+      if (this.frame === this.steps || this.frame === this.endAt) {
+        if (this.props.loop) {
+          if(this.props.onLoopComplete) this.props.onLoopComplete(this.setInstance());
+          this.completeLoopCicles += 1;
+          this.frame = this.startAt ? this.startAt : 0;
+        } else {
+          this.pause();
+        }
+      }
+    }
   }
 
-  setInstance(){
-    return {
-      play: this.play.bind(this),
-      pause: this.pause.bind(this),
-      goToAndPlay: this.goToAndPlay.bind(this),
-      goToAndPause: this.goToAndPause.bind(this),
-      getInfo: this.getInfo.bind(this),
-      setStartAt: this.setStartAt.bind(this),
-      setEndAt: this.setEndAt.bind(this)
-    };
+  pause() {
+    this.isPlaying = false;
+    clearInterval(this.intervalSprite);
+    if(this.props.onPause) this.props.onPause(this.setInstance());
+  }
+
+  goToAndPlay(frame = 0){
+    this.frame = frame;
+    this.play();
+  }
+
+  goToAndPause(frame = 0){
+    this.pause();
+    this.frame = frame;
+    this.moveImage();
+  }
+
+  setStartAt(frame){
+    this.startAt = frame - 1;
+    return this.startAt;
+  }
+
+  setEndAt(frame){
+    this.endAt = frame;
+    return this.endAt;
+  }
+
+  setFps(fps){
+    this.fps = fps;
+    this.setIntervalPlayFunctions();
   }
 
   getInfo(param){
@@ -171,53 +223,17 @@ class Spritesheet extends React.Component {
     }
   }
 
-  setStartAt(frame){
-    this.startAt = frame - 1;
-    return this.startAt;
-  }
-
-  setEndAt(frame){
-    this.endAt = frame;
-    return this.endAt;
-  }
-
-  play(withTimeout = false) {
-    if (!this.isPlaying) {
-      setTimeout(() => {
-        if(this.props.onPlay) this.props.onPlay(this.setInstance());
-        this.intervalSprite = setInterval(() => {
-          this.moveImage();
-
-          if (this.frame === this.steps || this.frame === this.endAt) {
-            if (this.props.loop) {
-              if(this.props.onLoopComplete) this.props.onLoopComplete(this.setInstance());
-              this.completeLoopCicles += 1;
-              this.frame = this.startAt ? this.startAt : 0;
-            } else {
-              this.pause();
-            }
-          }
-        }, 1000 / this.fps);
-      }, withTimeout ? (this.props.timeout ? this.props.timeout : 0) : 0);
-      this.isPlaying = true;
-    }
-  }
-
-  pause() {
-    this.isPlaying = false;
-    clearInterval(this.intervalSprite);
-    if(this.props.onPause) this.props.onPause(this.setInstance());
-  }
-
-  goToAndPlay(frame = 0){
-    this.frame = frame;
-    this.play();
-  }
-
-  goToAndPause(frame = 0){
-    this.pause();
-    this.frame = frame;
-    this.moveImage();
+  setInstance(){
+    return {
+      play: this.play.bind(this),
+      pause: this.pause.bind(this),
+      goToAndPlay: this.goToAndPlay.bind(this),
+      goToAndPause: this.goToAndPause.bind(this),
+      setStartAt: this.setStartAt.bind(this),
+      setEndAt: this.setEndAt.bind(this),
+      setFps: this.setFps.bind(this),
+      getInfo: this.getInfo.bind(this)
+    };
   }
 
   render() {

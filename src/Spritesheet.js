@@ -6,11 +6,12 @@ class Spritesheet extends React.Component {
     super(props);
 
     this.id = 'react-responsive-spritesheet--' + Math.random().toString(36).substring(7);
-    this.spriteEl = this.spriteElContainer = this.spriteElMove = this.intervalSprite = null;
+    this.spriteEl = this.spriteElContainer = this.spriteElMove = null;
+    this.intervalSprite = false;
     this.startAt = this.props.startAt ? this.setStartAt(this.props.startAt) : 0;
     this.endAt = this.setEndAt(this.props.endAt);
     this.frame = this.startAt ? this.startAt : 0;
-    this.fps = this.setFps(this.props.fps);
+    this.fps = this.props.fps;
     this.steps = this.props.steps;
     this.completeLoopCicles = 0;
     this.isPlaying = false;
@@ -121,6 +122,18 @@ class Spritesheet extends React.Component {
       this.frame += 1;
       if (this.props.onEachFrame) this.props.onEachFrame(this.setInstance());
     }
+
+    if(this.isPlaying){
+      if (this.frame === this.steps || this.frame === this.endAt) {
+        if (this.props.loop) {
+          if(this.props.onLoopComplete) this.props.onLoopComplete(this.setInstance());
+          this.completeLoopCicles += 1;
+          this.frame = this.startAt ? this.startAt : 0;
+        } else {
+          this.pause();
+        }
+      }
+    }
   }
 
   setInstance(){
@@ -184,29 +197,26 @@ class Spritesheet extends React.Component {
 
   setFps(fps){
     this.fps = fps;
-    return this.fps;
+    this.setIntervalPlayFunctions();
   }
 
-  play(withTimeout = false) {
+  play(withTimeout = false, setNewInterval = false) {
     if (!this.isPlaying) {
       setTimeout(() => {
         if(this.props.onPlay) this.props.onPlay(this.setInstance());
-        this.intervalSprite = setInterval(() => {
-          this.moveImage();
-
-          if (this.frame === this.steps || this.frame === this.endAt) {
-            if (this.props.loop) {
-              if(this.props.onLoopComplete) this.props.onLoopComplete(this.setInstance());
-              this.completeLoopCicles += 1;
-              this.frame = this.startAt ? this.startAt : 0;
-            } else {
-              this.pause();
-            }
-          }
-        }, 1000 / this.fps);
+        this.setIntervalPlayFunctions();
+        this.isPlaying = true;
       }, withTimeout ? (this.props.timeout ? this.props.timeout : 0) : 0);
-      this.isPlaying = true;
     }
+  }
+
+  setIntervalPlayFunctions(){
+    if(this.intervalSprite) clearInterval(this.intervalSprite);
+    this.intervalSprite = setInterval(() => {
+      if (this.isPlaying) {
+        this.moveImage();
+      }
+    }, 1000 / this.fps);
   }
 
   pause() {

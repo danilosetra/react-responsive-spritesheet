@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="730px" height="730px" viewBox="0 0 730 730" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard">
+            <g id="Group-2" transform="translate(321.500000, 237.500000) rotate(-150.000000) translate(-321.500000, -237.500000) translate(89.000000, 90.000000)" stroke="#0D0070" stroke-width="20" stroke-linecap="square">
+                <path d="M70,60 L345,60" id="Line-Copy"></path>
+                <path d="M190,215 L465,215" id="Line-Copy-3"></path>
+                <path d="M130,137 L405,137" id="Line-Copy-2"></path>
+                <g id="Group">
+                    <path d="M10,0 L10,275" id="Line"></path>
+                    <path d="M10,0 L285,5.68434189e-13" id="Line"></path>
+                    <path d="M10,275 L285,275" id="Line"></path>
+                </g>
+            </g>
+            <text id="react-responsive-spr" font-family="NewJuneBook" font-size="72" font-weight="normal" line-spacing="97" fill="#0C0072">
+                <tspan x="89.4625042" y="549">react responsive</tspan>
+                <tspan x="651.494504" y="549" font-size="103"></tspan>
+                <tspan x="83" y="631.659199" font-size="105.400002">spritesheet</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

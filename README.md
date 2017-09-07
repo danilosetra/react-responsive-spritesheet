@@ -7,13 +7,13 @@
 
 ## Hello, world!
 
-React component which helps you to easily apply responsive spritesheet animations on your project.
+React Responsive Spritesheet is a [React](https://facebook.github.io/react/) component which helps you to easily apply responsive spritesheet animations on your project.
 
 - [Installation](#installation)
 - [Usage](#usage)
- - [Options](#options)
- - [Call methods](#call-methods)
- - [Requesting infos](#requesting-infos)
+- [Options](#options)
+- [Call methods](#call-methods)
+- [Requesting infos](#requesting-infos)
 
 ## Installation
 
@@ -34,7 +34,7 @@ git push origin < TAG_VERSION_NAME >
 ---
 ## Usage
 
-**Simple usage with required parameters**
+**Basic usage with required parameters**
 
 ```javascript
 import Spritesheet from 'react-responsive-spritesheet';
@@ -194,7 +194,7 @@ class App extends Component {
 |   | **onPause** | `function` |   | *Provides callback function when the spritesheet pauses. spritesheet.goToAndPause(x) method also fires this callback* |
 |   | **onLoopComplete** | `function` |   | *Provides callback function when the animation completes a loop cicle* |
 |   | **onEachFrame** | `function` |   | *Provides callback function when each animation frame is changed* |
-|   | **onEnterFrame** | `array` |   | *Provides an array of callback functions when the specific animation frame is displayed* |
+|   | **onEnterFrame** | `array` |   | *Accepts an array of callback functions when the specific animation frame is displayed* |
 
 ---
 ## Call methods

@@ -14,6 +14,15 @@ React Responsive Spritesheet is a [React](https://facebook.github.io/react/) com
 - [Options](#options)
 - [Call methods](#call-methods)
 - [Requesting infos](#requesting-infos)
+----------
+**New version 2 available!**
+- Now you can use horizontal, vertical or multi-row spritesheet image;
+- Orientation parameter is no longer required;
+- Spritehseet image is preloaded before initialization;
+- The animation can be rewinded with **setDirection()** method and/or with **direction** parameter;
+- Direction information is provided by **getInfo()** method;
+
+For previous versions, see our [release history](https://github.com/danilosetra/react-responsive-spritesheet/releases)
 
 ## Installation
 
@@ -29,7 +38,8 @@ git merge develop
 git add .
 git commit -m "npm version update"
 git push origin master
-git push origin < TAG_VERSION_NAME >
+git push origin < vTAG_VERSION_NAME >
+git checkout develop
 -->
 ---
 ## Usage
@@ -50,7 +60,6 @@ class App extends Component {
         heightFrame={648}
         steps={46}
         fps={12}
-        orientation={`horizontal`}
       />
     );
 
@@ -77,7 +86,6 @@ class App extends Component {
         heightFrame={648}
         steps={46}
         fps={12}
-        orientation={`horizontal`}
         direction={`forward`}
         timeout={1800}
         autoplay={false}
@@ -169,7 +177,6 @@ class App extends Component {
 | &#10003; | **heightFrame** | `number` | 800 | *Original height of each frame, in pixels* |
 | &#10003; | **steps** | `number` | 47 | *Total frames / steps present on animation image* |
 | &#10003; | **fps** | `number` | 12 | *Velocity / Animation frames per second* |
-| &#10003; | **orientation** | `string` | 'horizontal' | *'horizontal', 'vertical' or 'multi-row' frames orientation on sprite image; Default: 'horizontal'* |
 | &#10003; | **direction** | `string` | 'rewind' | *'forward' or 'rewind' direction to display frames. It allows rewind the animation. Default: 'forward'* |
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
 |   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |

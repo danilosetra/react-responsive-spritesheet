@@ -82,10 +82,8 @@ class Spritesheet extends React.Component {
     imgLoadSprite.src = this.props.image;
     imgLoadSprite.onload = () => {
       this.imageSprite = imgLoadSprite;
-      if(this.props.orientation === 'multi-row'){
-        this.cols = this.imageSprite.width/this.props.widthFrame;
-        this.rows = this.imageSprite.height/this.props.heightFrame;
-      }
+      this.cols = (this.imageSprite.width === this.props.widthFrame) ? 1 : this.imageSprite.width / this.props.widthFrame;
+      this.rows = (this.imageSprite.height === this.props.heightFrame) ? 1 : this.imageSprite.height / this.props.heightFrame;
 
       this.spriteEl = document.querySelector('.' + this.id);
       this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
@@ -137,15 +135,9 @@ class Spritesheet extends React.Component {
   }
 
   moveImage(play = true) {
-    if (this.props.orientation === 'vertical') {
-      this.spriteElMove.style.backgroundPosition = `0 -${this.props.heightFrame * this.frame}px`;
-    } else if (this.props.orientation === 'multi-row') {
-      let currentRow = Math.floor(this.frame/this.cols);
-      let currentCol = this.frame-(this.cols*currentRow);
-      this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * currentCol}px -${this.props.heightFrame * currentRow}px`;
-    } else {
-      this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * this.frame}px 0`;
-    }
+    let currentRow = Math.floor(this.frame/this.cols);
+    let currentCol = this.frame-(this.cols*currentRow);
+    this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * currentCol}px -${this.props.heightFrame * currentRow}px`;
 
     if(this.props.onEnterFrame){
       this.props.onEnterFrame.map((frameAction, i) => {
@@ -284,7 +276,6 @@ Spritesheet.propTypes = {
   heightFrame: PropTypes.number.isRequired,
   steps: PropTypes.number.isRequired,
   fps: PropTypes.number.isRequired,
-  orientation: PropTypes.string.isRequired,
   direction: PropTypes.string,
   timeout: PropTypes.number,
   autoplay: PropTypes.bool,

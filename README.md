@@ -243,6 +243,7 @@ onMouseEnter={spritesheet => {
 | **width** | `number` | scaled animation width, in pixels |
 | **height** | `number` | scaled animation height, in pixels |
 | **scale** | `number` | scale of spritesheet, based on default sizes, note that scale=1 is relative to original size |
+| **direction** | `string` | direction 'forward' or 'rewind' playing |
 | **isPlaying** | `boolean` | if animation is currently playing, returns true |
 | **isPaused** | `boolean` | if animation is currently paused or stopped, returns true |
 | **completeLoopCicles** | `number` | total number of cycles (loops) the animation has completed |

@@ -15,7 +15,8 @@ class Spritesheet extends React.Component {
     this.completeLoopCicles = 0;
     this.isPlaying = false;
     this.spriteScale = 1;
-    this.frame = this.startAt ? this.startAt : (this.props.direction === 'rewind' ? (this.steps-1) : 0);
+    this.direction = this.props.direction ? this.props.direction : 'forward';
+    this.frame = this.startAt ? this.startAt : (this.direction === 'rewind' ? (this.steps-1) : 0);
   }
 
   componentDidMount() {
@@ -155,7 +156,7 @@ class Spritesheet extends React.Component {
     }
 
     if (play) {
-      if(this.props.direction === 'rewind'){
+      if(this.direction === 'rewind'){
         this.frame -= 1;
       } else {
         this.frame += 1;
@@ -165,14 +166,14 @@ class Spritesheet extends React.Component {
 
     if(this.isPlaying){
       if (
-        ((this.props.direction === 'forward' || !this.props.direction) && (this.frame === this.steps || this.frame === this.endAt))
+        (this.direction === 'forward' && (this.frame === this.steps || this.frame === this.endAt))
         ||
-        (this.props.direction === 'rewind' && (this.frame === -1 || this.frame === this.endAt))
+        (this.direction === 'rewind' && (this.frame === -1 || this.frame === this.endAt))
       ) {
         if (this.props.loop) {
           if(this.props.onLoopComplete) this.props.onLoopComplete(this.setInstance());
           this.completeLoopCicles += 1;
-          this.frame = this.startAt ? this.startAt : (this.props.direction === 'rewind' ? (this.steps-1) : 0);
+          this.frame = this.startAt ? this.startAt : (this.direction === 'rewind' ? (this.steps-1) : 0);
         } else {
           this.pause();
         }
@@ -214,6 +215,9 @@ class Spritesheet extends React.Component {
 
   getInfo(param){
     switch(param){
+      case 'direction': {
+        return this.direction;
+      }
       case 'frame': {
         return this.frame;
       }

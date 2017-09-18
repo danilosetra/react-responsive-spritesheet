@@ -168,7 +168,7 @@ class App extends Component {
 | &#10003; | **heightFrame** | `number` | 800 | *Original height of each frame, in pixels* |
 | &#10003; | **steps** | `number` | 47 | *Total frames / steps present on animation image* |
 | &#10003; | **fps** | `number` | 12 | *Velocity / Animation frames per second* |
-| &#10003; | **orientation** | `string` | 'horizontal' | *'horizontal' or 'vertical' frames orientation on sprite image* |
+| &#10003; | **orientation** | `string` | 'horizontal' | *'horizontal', 'vertical' or 'multi-row' frames orientation on sprite image; Default: 'horizontal'* |
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
 |   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |
 |   | **loop** | `boolean` | false | *Determines if animation replay on end* |

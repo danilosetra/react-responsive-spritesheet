@@ -78,6 +78,7 @@ class App extends Component {
         steps={46}
         fps={12}
         orientation={`horizontal`}
+        direction={`forward`}
         timeout={1800}
         autoplay={false}
         loop={true}
@@ -168,7 +169,8 @@ class App extends Component {
 | &#10003; | **heightFrame** | `number` | 800 | *Original height of each frame, in pixels* |
 | &#10003; | **steps** | `number` | 47 | *Total frames / steps present on animation image* |
 | &#10003; | **fps** | `number` | 12 | *Velocity / Animation frames per second* |
-| &#10003; | **orientation** | `string` | 'horizontal' | *'horizontal' or 'vertical' frames orientation on sprite image* |
+| &#10003; | **orientation** | `string` | 'horizontal' | *'horizontal', 'vertical' or 'multi-row' frames orientation on sprite image; Default: 'horizontal'* |
+| &#10003; | **direction** | `string` | 'rewind' | *'forward' or 'rewind' direction to display frames. It allows rewind the animation. Default: 'forward'* |
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
 |   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |
 |   | **loop** | `boolean` | false | *Determines if animation replay on end* |
@@ -218,6 +220,7 @@ onMouseEnter={spritesheet => {
 | **setStartAt** | `spritesheet.setStartAt(frameNumber)` | Sets the first frame to be displayed on animation starts. It will be considered on loop cycles. |
 | **setEndAt** | `spritesheet.setEndAt(frameNumber)` | Sets the last frame to be displayed on animation ends. It will be considered on loop cycles. |
 | **setFps** | `spritesheet.setFps(fpsNumber)` | Sets the fps (speed) of animation, even while is playing |
+| **setDirection** | `spritesheet.setDirection('rewind')` | Sets the direction of animation forward or rewind |
 | **getInfo** | `spritesheet.getInfo('stringInfoToRetrieve')` | Returns some real-time information about spritesheet. See below on **[Requesting infos](#requesting-infos)** section |
 
 ---
@@ -241,6 +244,7 @@ onMouseEnter={spritesheet => {
 | **width** | `number` | scaled animation width, in pixels |
 | **height** | `number` | scaled animation height, in pixels |
 | **scale** | `number` | scale of spritesheet, based on default sizes, note that scale=1 is relative to original size |
+| **direction** | `string` | direction 'forward' or 'rewind' playing |
 | **isPlaying** | `boolean` | if animation is currently playing, returns true |
 | **isPaused** | `boolean` | if animation is currently paused or stopped, returns true |
 | **completeLoopCicles** | `number` | total number of cycles (loops) the animation has completed |

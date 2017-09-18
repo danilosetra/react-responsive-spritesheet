@@ -6,16 +6,17 @@ class Spritesheet extends React.Component {
     super(props);
 
     this.id = 'react-responsive-spritesheet--' + Math.random().toString(36).substring(7);
-    this.spriteEl = this.spriteElContainer = this.spriteElMove = null;
+    this.spriteEl = this.spriteElContainer = this.spriteElMove = this.imageSprite = this.cols = this.rows = null;
     this.intervalSprite = false;
     this.startAt = this.props.startAt ? this.setStartAt(this.props.startAt) : 0;
     this.endAt = this.setEndAt(this.props.endAt);
-    this.frame = this.startAt ? this.startAt : 0;
     this.fps = this.props.fps;
     this.steps = this.props.steps;
     this.completeLoopCicles = 0;
     this.isPlaying = false;
     this.spriteScale = 1;
+    this.direction = this.setDirection(this.props.direction);
+    this.frame = this.startAt ? this.startAt : (this.direction === 'rewind' ? (this.steps-1) : 0);
   }
 
   componentDidMount() {
@@ -49,7 +50,6 @@ class Spritesheet extends React.Component {
 
     let moveStyles = {
       overflow: 'hidden',
-      backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       display: 'table',
       backgroundImage: 'url(' + this.props.image + ')',
@@ -78,23 +78,37 @@ class Spritesheet extends React.Component {
   }
 
   init() {
-    this.spriteEl = document.querySelector('.' + this.id);
-    this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
-    this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
+    let imgLoadSprite = new Image();
+    imgLoadSprite.src = this.props.image;
+    imgLoadSprite.onload = () => {
+      this.imageSprite = imgLoadSprite;
+      if(this.props.orientation === 'multi-row'){
+        this.cols = this.imageSprite.width/this.props.widthFrame;
+        this.rows = this.imageSprite.height/this.props.heightFrame;
+      }
 
-    this.resize(false);
-    window.addEventListener('resize', this.resize.bind(this));
-    this.moveImage(false);
-    setTimeout(() => {
+      this.spriteEl = document.querySelector('.' + this.id);
+      this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
+      this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
+
       this.resize(false);
-    }, 10);
+      window.addEventListener('resize', this.resize.bind(this));
+      this.moveImage(false);
+      setTimeout(() => {
+        this.resize(false);
+      }, 10);
 
-    if (this.props.autoplay !== false) {
-      this.play(true);
-    }
+      if (this.props.autoplay !== false) {
+        this.play(true);
+      }
 
-    if (this.props.getInstance) this.props.getInstance(this.setInstance());
-    if (this.props.onInit) this.props.onInit(this.setInstance.bind(this));
+      if (this.props.getInstance) this.props.getInstance(this.setInstance());
+      if (this.props.onInit) this.props.onInit(this.setInstance.bind(this));
+    };
+
+    imgLoadSprite.onerror = () => {
+      console.error(`Failed to load image ${img.src}`)
+    };
   }
 
   resize(callback = true) {
@@ -125,6 +139,10 @@ class Spritesheet extends React.Component {
   moveImage(play = true) {
     if (this.props.orientation === 'vertical') {
       this.spriteElMove.style.backgroundPosition = `0 -${this.props.heightFrame * this.frame}px`;
+    } else if (this.props.orientation === 'multi-row') {
+      let currentRow = Math.floor(this.frame/this.cols);
+      let currentCol = this.frame-(this.cols*currentRow);
+      this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * currentCol}px -${this.props.heightFrame * currentRow}px`;
     } else {
       this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * this.frame}px 0`;
     }
@@ -138,16 +156,24 @@ class Spritesheet extends React.Component {
     }
 
     if (play) {
-      this.frame += 1;
+      if(this.direction === 'rewind'){
+        this.frame -= 1;
+      } else {
+        this.frame += 1;
+      }
       if (this.props.onEachFrame) this.props.onEachFrame(this.setInstance());
     }
 
     if(this.isPlaying){
-      if (this.frame === this.steps || this.frame === this.endAt) {
+      if (
+        (this.direction === 'forward' && (this.frame === this.steps || this.frame === this.endAt))
+        ||
+        (this.direction === 'rewind' && (this.frame === -1 || this.frame === this.endAt))
+      ) {
         if (this.props.loop) {
           if(this.props.onLoopComplete) this.props.onLoopComplete(this.setInstance());
           this.completeLoopCicles += 1;
-          this.frame = this.startAt ? this.startAt : 0;
+          this.frame = this.startAt ? this.startAt : (this.direction === 'rewind' ? (this.steps-1) : 0);
         } else {
           this.pause();
         }
@@ -187,8 +213,16 @@ class Spritesheet extends React.Component {
     this.setIntervalPlayFunctions();
   }
 
+  setDirection(direction){
+    this.direction = (direction === 'rewind') ? 'rewind' : 'forward';
+    return this.direction;
+  }
+
   getInfo(param){
     switch(param){
+      case 'direction': {
+        return this.direction;
+      }
       case 'frame': {
         return this.frame;
       }
@@ -232,6 +266,7 @@ class Spritesheet extends React.Component {
       setStartAt: this.setStartAt.bind(this),
       setEndAt: this.setEndAt.bind(this),
       setFps: this.setFps.bind(this),
+      setDirection: this.setDirection.bind(this),
       getInfo: this.getInfo.bind(this)
     };
   }
@@ -250,6 +285,7 @@ Spritesheet.propTypes = {
   steps: PropTypes.number.isRequired,
   fps: PropTypes.number.isRequired,
   orientation: PropTypes.string.isRequired,
+  direction: PropTypes.string,
   timeout: PropTypes.number,
   autoplay: PropTypes.bool,
   loop: PropTypes.bool,

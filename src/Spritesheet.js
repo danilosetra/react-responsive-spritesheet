@@ -15,7 +15,7 @@ class Spritesheet extends React.Component {
     this.completeLoopCicles = 0;
     this.isPlaying = false;
     this.spriteScale = 1;
-    this.direction = this.props.direction ? this.props.direction : 'forward';
+    this.direction = this.setDirection(this.props.direction);
     this.frame = this.startAt ? this.startAt : (this.direction === 'rewind' ? (this.steps-1) : 0);
   }
 
@@ -213,6 +213,11 @@ class Spritesheet extends React.Component {
     this.setIntervalPlayFunctions();
   }
 
+  setDirection(direction){
+    this.direction = (direction === 'rewind') ? 'rewind' : 'forward';
+    return this.direction;
+  }
+
   getInfo(param){
     switch(param){
       case 'direction': {
@@ -261,6 +266,7 @@ class Spritesheet extends React.Component {
       setStartAt: this.setStartAt.bind(this),
       setEndAt: this.setEndAt.bind(this),
       setFps: this.setFps.bind(this),
+      setDirection: this.setDirection.bind(this),
       getInfo: this.getInfo.bind(this)
     };
   }

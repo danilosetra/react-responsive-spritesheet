@@ -220,6 +220,7 @@ onMouseEnter={spritesheet => {
 | **setStartAt** | `spritesheet.setStartAt(frameNumber)` | Sets the first frame to be displayed on animation starts. It will be considered on loop cycles. |
 | **setEndAt** | `spritesheet.setEndAt(frameNumber)` | Sets the last frame to be displayed on animation ends. It will be considered on loop cycles. |
 | **setFps** | `spritesheet.setFps(fpsNumber)` | Sets the fps (speed) of animation, even while is playing |
+| **setDirection** | `spritesheet.setDirection('rewind')` | Sets the direction of animation forward or rewind |
 | **getInfo** | `spritesheet.getInfo('stringInfoToRetrieve')` | Returns some real-time information about spritesheet. See below on **[Requesting infos](#requesting-infos)** section |
 
 ---

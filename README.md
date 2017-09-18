@@ -78,6 +78,7 @@ class App extends Component {
         steps={46}
         fps={12}
         orientation={`horizontal`}
+        direction={`forward`}
         timeout={1800}
         autoplay={false}
         loop={true}
@@ -169,6 +170,7 @@ class App extends Component {
 | &#10003; | **steps** | `number` | 47 | *Total frames / steps present on animation image* |
 | &#10003; | **fps** | `number` | 12 | *Velocity / Animation frames per second* |
 | &#10003; | **orientation** | `string` | 'horizontal' | *'horizontal', 'vertical' or 'multi-row' frames orientation on sprite image; Default: 'horizontal'* |
+| &#10003; | **direction** | `string` | 'rewind' | *'forward' or 'rewind' direction to display frames. It allows rewind the animation. Default: 'forward'* |
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
 |   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |
 |   | **loop** | `boolean` | false | *Determines if animation replay on end* |

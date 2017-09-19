@@ -1,7 +1,7 @@
 {
   "name": "react-responsive-spritesheet",
   "description": "React component which helps you to easily apply responsive spritesheet animations on your project.",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "license": "MIT",
   "homepage": "https://github.com/danilosetra/react-responsive-spritesheet#readme",
   "repository": {

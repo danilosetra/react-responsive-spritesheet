@@ -41,7 +41,7 @@ class Spritesheet extends React.Component {
       width: `${this.props.widthFrame}px`,
       height: `${this.props.heightFrame}px`,
       transform:`scale(${this.spriteScale})`,
-      transformOrigin: '0 50%',
+      transformOrigin: '0 0',
       backgroundImage: containerBackgroundImage,
       backgroundSize: containerBackgroundSize,
       backgroundRepeat: containerBackgroundRepeat,
@@ -112,6 +112,7 @@ class Spritesheet extends React.Component {
   resize(callback = true) {
     this.spriteScale = this.spriteEl.offsetWidth / this.props.widthFrame;
     this.spriteElContainer.style.transform = `scale(${this.spriteScale})`;
+    this.spriteEl.style.height = `${this.getInfo('height')}px`;
     if(callback && this.props.onResize) this.props.onResize(this.setInstance());
   }
 

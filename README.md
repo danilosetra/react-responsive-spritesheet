@@ -14,6 +14,7 @@ React Responsive Spritesheet is a [React](https://facebook.github.io/react/) com
 - [Options](#options)
 - [Call methods](#call-methods)
 - [Requesting infos](#requesting-infos)
+- [Examples](#examples)
 
 ----------
 

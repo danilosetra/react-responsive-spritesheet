@@ -101,7 +101,7 @@ class Spritesheet extends React.Component {
       }
 
       if (this.props.getInstance) this.props.getInstance(this.setInstance());
-      if (this.props.onInit) this.props.onInit(this.setInstance.bind(this));
+      if (this.props.onInit) this.props.onInit(this.setInstance());
     };
 
     imgLoadSprite.onerror = () => {

@@ -7,7 +7,7 @@
 
 ## Hello, world!
 
-React Responsive Spritesheet is a [React](https://facebook.github.io/react/) component which helps you to easily apply responsive spritesheet animations on your project. See our <a href="https://stackblitz.com/edit/react-responsive-spritesheet-example-01?file=index.js" target="_blank">basic example</a>.
+React Responsive Spritesheet is a [React](https://facebook.github.io/react/) component which helps you to easily apply responsive spritesheet animations on your project. See our [basic example](https://stackblitz.com/edit/react-responsive-spritesheet-example-01?file=index.js).
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -276,7 +276,7 @@ onMouseEnter={spritesheet => {
 **Example #1**
 A basic usage with minimal parameters for spritesheet animation loop starting automatically.
 
-<a href="https://react-responsive-spritesheet-example-01.stackblitz.io/" target="_blank">live demo</a> / <a href="https://stackblitz.com/edit/react-responsive-spritesheet-example-01?file=index.js" target="_blank">edit source code</a>
+[live demo](https://react-responsive-spritesheet-example-01.stackblitz.io/) / [edit source code](https://stackblitz.com/edit/react-responsive-spritesheet-example-01?file=index.js)
 
 ```javascript
 <Spritesheet
@@ -296,7 +296,7 @@ A basic usage with minimal parameters for spritesheet animation loop starting au
 **Example #2**
 Using parameters **onMouseEnter** and **onMouseLeave** for play and pause animation
 
-<a href="https://react-responsive-spritesheet-example-02.stackblitz.io/" target="_blank">live demo</a> / <a href="https://stackblitz.com/edit/react-responsive-spritesheet-example-02?file=index.js" target="_blank">edit source code</a>
+[live demo](https://react-responsive-spritesheet-example-02.stackblitz.io/) / [edit source code](https://stackblitz.com/edit/react-responsive-spritesheet-example-02?file=index.js)
 
 ```javascript
 <Spritesheet
@@ -323,7 +323,7 @@ Using parameters **onMouseEnter** and **onMouseLeave** for play and pause animat
 
 Using spritesheet instance to controls outside parameters, on your own functions.
 
-<a href="https://react-responsive-spritesheet-example-03.stackblitz.io/" target="_blank">live demo</a> / <a href="https://stackblitz.com/edit/react-responsive-spritesheet-example-03?file=index.js" target="_blank">edit source code</a>
+[live demo](https://react-responsive-spritesheet-example-03.stackblitz.io/) / [edit source code](https://stackblitz.com/edit/react-responsive-spritesheet-example-03?file=index.js)
 
 First, we use **getInstance** parameter to get instance and set **this.spritesheetInstance** to be used on your whole component, see below:
 
@@ -381,7 +381,7 @@ myFunctionToggleDirection(){
 **Example #4**
 Using background image
 
-<a href="https://react-responsive-spritesheet-example-04.stackblitz.io/" target="_blank">live demo</a> / <a href="https://stackblitz.com/edit/react-responsive-spritesheet-example-04?file=index.js" target="_blank">edit source code</a>
+[live demo](https://react-responsive-spritesheet-example-04.stackblitz.io/) / [edit source code](https://stackblitz.com/edit/react-responsive-spritesheet-example-04?file=index.js)
 
 ```javascript
 <Spritesheet

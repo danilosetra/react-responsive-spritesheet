@@ -2,27 +2,31 @@
 [![Build Status](https://travis-ci.org/danilosetra/react-responsive-spritesheet.svg?branch=master)](https://travis-ci.org/danilosetra/react-responsive-spritesheet) [![npm](https://img.shields.io/npm/l/react-responsive-spritesheet.svg)](https://npmjs.org/package/react-responsive-spritesheet) [![npm](https://img.shields.io/npm/v/react-responsive-spritesheet.svg)](https://npmjs.org/package/react-responsive-spritesheet) [![node version](https://img.shields.io/badge/node.js-%3E=_0.10-green.svg?style=flat-square)](http://nodejs.org/download/) [![Known Vulnerabilities](https://snyk.io/test/github/danilosetra/react-responsive-spritesheet/badge.svg)](https://snyk.io/test/github/danilosetra/react-responsive-spritesheet)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/danilosetra/react-responsive-spritesheet/develop/assets/images/logo/rrs-logo.png" width="250" height="250">
+  <img src="https://raw.githubusercontent.com/danilosetra/react-responsive-spritesheet/master/assets/images/logo/rrs-logo.png" width="250" height="250">
 </p>
 
 ## Hello, world!
 
-React Responsive Spritesheet is a [React](https://facebook.github.io/react/) component which helps you to easily apply responsive spritesheet animations on your project.
+React Responsive Spritesheet is a [React](https://facebook.github.io/react/) component which helps you to easily apply responsive spritesheet animations on your project. See our <a href="https://stackblitz.com/edit/react-responsive-spritesheet-example-01?file=index.js" target="_blank">basic example</a>.
 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Options](#options)
 - [Call methods](#call-methods)
 - [Requesting infos](#requesting-infos)
+
 ----------
+
 **New version 2 available!**
 - Now you can use horizontal, vertical or multi-row spritesheet image;
 - Orientation parameter is no longer required;
-- Spritehseet image is preloaded before initialization;
+- Spritesheet image is preloaded before initialization;
 - The animation can be rewinded with **setDirection()** method and/or with **direction** parameter;
 - Direction information is provided by **getInfo()** method;
 
 For previous versions, see our [release history](https://github.com/danilosetra/react-responsive-spritesheet/releases)
+
+----------
 
 ## Installation
 
@@ -41,7 +45,11 @@ git push origin master
 git push origin < vTAG_VERSION_NAME >
 git checkout develop
 -->
----
+
+
+----------
+
+
 ## Usage
 
 **Basic usage with required parameters**
@@ -165,7 +173,9 @@ class App extends Component {
 
 }
 ```
----
+
+----------
+
 ## Options
 
 | Required | Parameter | Type | Example | Description |
@@ -205,14 +215,15 @@ class App extends Component {
 |   | **onEachFrame** | `function` |   | *Provides callback function when each animation frame is changed* |
 |   | **onEnterFrame** | `array` |   | *Accepts an array of callback functions when the specific animation frame is displayed* |
 
----
+----------
+
 ## Call methods
 
 Using the instance provided on callback functions you can call some methods
 
 Example
 
-```
+```javascript
 onMouseEnter={spritesheet => {
   console.log( spritesheet.setStartAt(6) );
 }}
@@ -230,14 +241,15 @@ onMouseEnter={spritesheet => {
 | **setDirection** | `spritesheet.setDirection('rewind')` | Sets the direction of animation forward or rewind |
 | **getInfo** | `spritesheet.getInfo('stringInfoToRetrieve')` | Returns some real-time information about spritesheet. See below on **[Requesting infos](#requesting-infos)** section |
 
----
+----------
+
 ## Requesting infos
 
 Using the instance.getInfo(x) method provided on callback functions you can request a real-time information about your spritesheet animation
 
 Example
 
-```
+```javascript
 onMouseEnter={spritesheet => {
   console.log( spritesheet.getInfo('frame') );
 }}
@@ -255,3 +267,136 @@ onMouseEnter={spritesheet => {
 | **isPlaying** | `boolean` | if animation is currently playing, returns true |
 | **isPaused** | `boolean` | if animation is currently paused or stopped, returns true |
 | **completeLoopCicles** | `number` | total number of cycles (loops) the animation has completed |
+
+----------
+
+## Examples
+
+**Example #1**
+A basic usage with minimal parameters for spritesheet animation loop starting automatically.
+
+<a href="https://react-responsive-spritesheet-example-01.stackblitz.io/" target="_blank">live demo</a> / <a href="https://stackblitz.com/edit/react-responsive-spritesheet-example-01?file=index.js" target="_blank">edit source code</a>
+
+```javascript
+<Spritesheet
+  className={`my-element__class--style`}
+  image={`https://raw.githubusercontent.com/danilosetra/react-responsive-spritesheet/master/assets/images/examples/sprite-image-horizontal.png`}
+  widthFrame={420}
+  heightFrame={500}
+  steps={14}
+  fps={10}
+  autoplay={true}
+  loop={true}
+/>
+```
+
+----------
+
+**Example #2**
+Using parameters **onMouseEnter** and **onMouseLeave** for play and pause animation
+
+<a href="https://react-responsive-spritesheet-example-02.stackblitz.io/" target="_blank">live demo</a> / <a href="https://stackblitz.com/edit/react-responsive-spritesheet-example-02?file=index.js" target="_blank">edit source code</a>
+
+```javascript
+<Spritesheet
+  className={`my-element__class--style`}
+  image={`https://raw.githubusercontent.com/danilosetra/react-responsive-spritesheet/master/assets/images/examples/sprite-image-horizontal.png`}
+  widthFrame={420}
+  heightFrame={500}
+  steps={14}
+  fps={10}
+  autoplay={false}
+  loop={true}
+  onMouseEnter={spritesheet => {
+    spritesheet.play();
+  }}
+  onMouseLeave={spritesheet => {
+    spritesheet.pause();
+  }}
+/>
+```
+
+----------
+
+**Example #3**
+
+Using spritesheet instance to controls outside parameters, on your own functions.
+
+<a href="https://react-responsive-spritesheet-example-03.stackblitz.io/" target="_blank">live demo</a> / <a href="https://stackblitz.com/edit/react-responsive-spritesheet-example-03?file=index.js" target="_blank">edit source code</a>
+
+First, we use **getInstance** parameter to get instance and set **this.spritesheetInstance** to be used on your whole component, see below:
+
+```javascript
+<Spritesheet
+  className={`my-element__class--style`}
+  image={`https://raw.githubusercontent.com/danilosetra/react-responsive-spritesheet/master/assets/images/examples/sprite-image-horizontal.png`}
+  widthFrame={420}
+  heightFrame={500}
+  steps={14}
+  fps={10}
+  autoplay={false}
+  loop={true}
+  getInstance={spritesheet => {
+    this.spritesheeInstance = spritesheet;
+  }}
+/>
+```
+
+Then, we can create buttons or whatever and set their own functions:
+
+```javascript
+<div>
+  <button onClick={this.myFunctionPlay.bind(this)}>play</button>
+  <button onClick={this.myFunctionPause.bind(this)}>pause</button>
+  <button onClick={this.myFunctionGetFrame.bind(this)}>alert current frame</button>
+  <button onClick={this.myFunctionToggleDirection.bind(this)}>toggle direction</button>
+</div>
+```
+
+```javascript
+myFunctionPlay(){
+  this.spritesheeInstance.play();
+}
+
+myFunctionPause(){
+  this.spritesheeInstance.pause();
+}
+
+myFunctionGetFrame(){
+  alert(this.spritesheeInstance.getInfo('frame'));
+}
+
+myFunctionToggleDirection(){
+  if(this.spritesheeInstance.getInfo('direction') === 'forward'){
+    this.spritesheeInstance.setDirection('rewind');
+  } else if(this.spritesheeInstance.getInfo('direction') === 'rewind'){
+    this.spritesheeInstance.setDirection('forward');
+  }
+}
+```
+
+----------
+
+**Example #4**
+Using background image
+
+<a href="https://react-responsive-spritesheet-example-04.stackblitz.io/" target="_blank">live demo</a> / <a href="https://stackblitz.com/edit/react-responsive-spritesheet-example-04?file=index.js" target="_blank">edit source code</a>
+
+```javascript
+<Spritesheet
+  className={`my-element__class--style`}
+  image={`https://raw.githubusercontent.com/danilosetra/react-responsive-spritesheet/master/assets/images/examples/sprite-image-horizontal.png`}
+  widthFrame={420}
+  heightFrame={500}
+  steps={14}
+  fps={10}
+  autoplay={true}
+  loop={true}
+  background={`https://raw.githubusercontent.com/danilosetra/react-responsive-spritesheet/master/assets/images/examples/sprite-image-background.png`}
+  backgroundSize={`cover`}
+  backgroundRepeat={`no-repeat`}
+  backgroundPosition={`center center`}
+/>
+```
+
+----------

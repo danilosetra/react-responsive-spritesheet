@@ -8,6 +8,7 @@ class Spritesheet extends React.Component {
     this.id = 'react-responsive-spritesheet--' + Math.random().toString(36).substring(7);
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.imageSprite = this.cols = this.rows = null;
     this.intervalSprite = false;
+    this.isResponsive = this.props.isResponsive === false ? false : true;
     this.startAt = this.props.startAt ? this.setStartAt(this.props.startAt) : 0;
     this.endAt = this.setEndAt(this.props.endAt);
     this.fps = this.props.fps;
@@ -110,10 +111,12 @@ class Spritesheet extends React.Component {
   }
 
   resize(callback = true) {
-    this.spriteScale = this.spriteEl.offsetWidth / this.props.widthFrame;
-    this.spriteElContainer.style.transform = `scale(${this.spriteScale})`;
-    this.spriteEl.style.height = `${this.getInfo('height')}px`;
-    if(callback && this.props.onResize) this.props.onResize(this.setInstance());
+    if(this.isResponsive){
+      this.spriteScale = this.spriteEl.offsetWidth / this.props.widthFrame;
+      this.spriteElContainer.style.transform = `scale(${this.spriteScale})`;
+      this.spriteEl.style.height = `${this.getInfo('height')}px`;
+      if(callback && this.props.onResize) this.props.onResize(this.setInstance());
+    }
   }
 
   play(withTimeout = false, setNewInterval = false) {
@@ -275,6 +278,7 @@ Spritesheet.propTypes = {
   image: PropTypes.string.isRequired,
   widthFrame: PropTypes.number.isRequired,
   heightFrame: PropTypes.number.isRequired,
+  isResponsive: PropTypes.bool,
   steps: PropTypes.number.isRequired,
   fps: PropTypes.number.isRequired,
   direction: PropTypes.string,

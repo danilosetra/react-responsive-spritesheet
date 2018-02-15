@@ -192,6 +192,7 @@ class App extends Component {
 |   | **timeout** | `number` | 1200 | *Delay for start animating. The '**autoplay**' option must be **true*** |
 |   | **autoplay** | `boolean` | false | *Determines if animation starts automatically* |
 |   | **loop** | `boolean` | false | *Determines if animation replay on end* |
+|   | **isResponsive** | `boolean` | true | *Determines if animation resizes according window resize* |
 |   | **startAt** | `number` | false | *Determines the first frame which will be displayed on start to animate* |
 |   | **endAt** | `number` | false | *Determines the last frame which will be displayed on stop animation* |
 |   | **background** | `string` | '/assets/background.png' | *URL or path of background image placed behind animation* |

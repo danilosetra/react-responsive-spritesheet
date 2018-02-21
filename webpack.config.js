@@ -20,7 +20,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2017', 'stage-3', 'react']
+            presets: [['env', { "modules": false }], 'stage-3', 'react']
           }
         }
       }

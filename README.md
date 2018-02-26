@@ -35,9 +35,9 @@ For previous versions, see our [release history](https://github.com/danilosetra/
 $ npm install react-responsive-spritesheet --save
 ```
 <!--
-git add .
-git commit -m "npm version update"
 npm run build
+git add .
+git commit -m "npm version update // <MESSAGE COMMIT>"
 npm version < patch / minor / major >
 npm publish
 git checkout master

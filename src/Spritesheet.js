@@ -52,7 +52,7 @@ class Spritesheet extends React.Component {
     let moveStyles = {
       overflow: 'hidden',
       backgroundRepeat: 'no-repeat',
-      display: 'table',
+      display: 'table-cell',
       backgroundImage: 'url(' + this.props.image + ')',
       width: `${this.props.widthFrame}px`,
       height: `${this.props.heightFrame}px`,

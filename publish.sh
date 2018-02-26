@@ -72,6 +72,7 @@ git checkout master
 git merge develop
 git push origin master
 git push origin v$PACKAGE_VERSION
+git push origin develop
 git checkout develop
 echo "DONE!"
 echo " "

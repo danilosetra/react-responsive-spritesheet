@@ -1,11 +1,12 @@
 clear
 pwd
+echo " "
 
 while true; do
     read -p "Do you wish to upgrade this version and publish to NPM? " yn
     case $yn in
         [Yy]* )
-          clear
+          echo " "
           echo "PUBLISH VERSION STARTS...";
           break;;
         [Nn]* )
@@ -22,10 +23,11 @@ PACKAGE_VERSION=$(cat package.json \
   | awk -F: '{ print $2 }' \
   | sed 's/[",\t ]//g')
 
-read -p "Enter the type of update (major, patch or minor): " PATCH_TYPE
+read -p "Enter the type of update ('major', 'minor' or 'patch' -> MAJOR.MINOR.PATCH): " PATCH_TYPE
 read -p "Enter commit message: " COMMIT_MESSAGE
 
-clear
+
+echo " "
 echo "/////--------------------------------------------------------/////"
 echo "START -> CURRENT VERSION: ${PACKAGE_VERSION}"
 echo " "
@@ -39,6 +41,13 @@ echo "GIT COMMIT"
 git add .
 git commit -m "npm version update // ${COMMIT_MESSAGE}"
 echo "DONE! "
+echo " "
+
+echo "UPDATING LOCAL BRANCHES..."
+git checkout develop
+git pull origin develop
+git pull origin master
+echo "DONE!"
 echo " "
 
 echo "UPDATING VERSION"
@@ -62,7 +71,7 @@ echo "GIT MERGING AND UPDATING..."
 git checkout master
 git merge develop
 git push origin master
-git push origin $PACKAGE_VERSION
+git push origin v$PACKAGE_VERSION
 git checkout develop
 echo "DONE!"
 echo " "

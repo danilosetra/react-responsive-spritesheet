@@ -33,7 +33,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack",
+    "publish": "bash publish.sh"
   },
   "peerDependencies": {
     "react": "^15.5.4"

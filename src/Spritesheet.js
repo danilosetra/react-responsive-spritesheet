@@ -86,27 +86,29 @@ class Spritesheet extends React.Component {
     let imgLoadSprite = new Image();
     imgLoadSprite.src = this.props.image;
     imgLoadSprite.onload = () => {
-      this.imageSprite = imgLoadSprite;
-      this.cols = (this.imageSprite.width === this.props.widthFrame) ? 1 : this.imageSprite.width / this.props.widthFrame;
-      this.rows = (this.imageSprite.height === this.props.heightFrame) ? 1 : this.imageSprite.height / this.props.heightFrame;
+      if(document && document.querySelector('.' + this.id)){
+        this.imageSprite = imgLoadSprite;
+        this.cols = (this.imageSprite.width === this.props.widthFrame) ? 1 : this.imageSprite.width / this.props.widthFrame;
+        this.rows = (this.imageSprite.height === this.props.heightFrame) ? 1 : this.imageSprite.height / this.props.heightFrame;
 
-      this.spriteEl = document.querySelector('.' + this.id);
-      this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
-      this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
+        this.spriteEl = document.querySelector('.' + this.id);
+        this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
+        this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
 
-      this.resize(false);
-      window.addEventListener('resize', this.resize.bind(this));
-      this.moveImage(false);
-      setTimeout(() => {
         this.resize(false);
-      }, 10);
+        window.addEventListener('resize', this.resize.bind(this));
+        this.moveImage(false);
+        setTimeout(() => {
+          this.resize(false);
+        }, 10);
 
-      if (this.props.autoplay !== false) {
-        this.play(true);
+        if (this.props.autoplay !== false) {
+          this.play(true);
+        }
+
+        if (this.props.getInstance) this.props.getInstance(this.setInstance());
+        if (this.props.onInit) this.props.onInit(this.setInstance());
       }
-
-      if (this.props.getInstance) this.props.getInstance(this.setInstance());
-      if (this.props.onInit) this.props.onInit(this.setInstance());
     };
 
     imgLoadSprite.onerror = () => {

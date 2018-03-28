@@ -24,6 +24,10 @@ class Spritesheet extends React.Component {
     this.init();
   }
 
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.resize.bind(this));
+  }
+
   renderElements() {
     let containerBackgroundImage = '';
     let containerBackgroundSize = '';

@@ -253,7 +253,7 @@ class Spritesheet extends React.Component {
         return this.completeLoopCicles;
       }
       default: {
-        console.error(`Invalid param \`${param}\` requested by Spritesheet.getinfo(). See the documentation on https://github.com/danilosetra/react-responsive-spritesheet`); 
+        throw new Error(`Invalid param \`${param}\` requested by Spritesheet.getinfo(). See the documentation on https://github.com/danilosetra/react-responsive-spritesheet`); 
         break;
       }
     }

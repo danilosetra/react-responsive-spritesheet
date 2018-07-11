@@ -37,8 +37,8 @@ Spritesheet.propTypes = {
   autoplay: PropTypes.bool,
   loop: PropTypes.bool,
   startAt: PropTypes.number,
-  endAt: PropTypes.number,
-  background: PropTypes.string,
+  endAt: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+  background: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   backgroundSize: PropTypes.string,
   backgroundRepeat: PropTypes.string,
   backgroundPosition: PropTypes.string,
@@ -59,6 +59,39 @@ Spritesheet.propTypes = {
   onLoopComplete: PropTypes.func,
   onEachFrame: PropTypes.func,
   onEnterFrame: PropTypes.array
+};
+
+Spritesheet.defaultProps = {
+  className: '',
+  style: {},
+  isResponsive: true,
+  direction: 'forward',
+  timeout: 0,
+  autoplay: true,
+  loop: false,
+  startAt: 0,
+  endAt: false,
+  background: false,
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: '',
+  getInstance: () => {},
+  onClick: () => {},
+  onDoubleClick: () => {},
+  onMouseMove: () => {},
+  onMouseEnter: () => {},
+  onMouseLeave: () => {},
+  onMouseOver: () => {},
+  onMouseOut: () => {},
+  onMouseDown: () => {},
+  onMouseUp: () => {},
+  onInit: () => {},
+  onResize: () => {},
+  onPlay: () => {},
+  onPause: () => {},
+  onLoopComplete: () => {},
+  onEachFrame: () => {},
+  onEnterFrame: []
 };
 
 export default Spritesheet;

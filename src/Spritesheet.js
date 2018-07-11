@@ -23,4 +23,10 @@ class Spritesheet extends React.Component {
   }
 }
 
+
+Spritesheet.propTypes = {
+  className: PropTypes.string
+};
+
+
 export default Spritesheet;

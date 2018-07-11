@@ -11,11 +11,11 @@ class Spritesheet extends React.Component {
   }
 
   init() {
-    console.log('let\'s start...');
+    console.log('lets start...');
   }
 
   renderElements() {
-    return <div />
+    return <div />;
   }
 
   render() {
@@ -23,10 +23,8 @@ class Spritesheet extends React.Component {
   }
 }
 
-
 Spritesheet.propTypes = {
   className: PropTypes.string
 };
-
 
 export default Spritesheet;

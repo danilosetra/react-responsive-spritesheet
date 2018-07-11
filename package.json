@@ -31,30 +31,35 @@
     "email": "danilosetra@gmail.com"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
     "build": "webpack",
-    "build-pub": "bash publish.sh"
-  },
-  "peerDependencies": {
-    "react": "^15.5.4"
+    "build-pub": "bash publish.sh",
+    "lintjs-local": "eslint -c .eslintrc src/**/*"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
-    "babel-minify-webpack-plugin": "^0.2.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-es2017": "^6.24.1",
-    "babel-preset-minify": "^0.2.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-3": "^6.24.1"
-  },
-  "dependencies": {
-    "prop-types": "^15.5.10",
-    "react": "^15.5.4",
-    "webpack": "^2.6.1"
+    "babel-cli": "6.24.1",
+    "babel-core": "6.24.1",
+    "babel-eslint": "8.2.3",
+    "babel-loader": "7.0.0",
+    "babel-minify-webpack-plugin": "0.3.1",
+    "babel-plugin-transform-object-rest-spread": "6.23.0",
+    "babel-plugin-transform-react-jsx": "6.24.1",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-es2017": "6.24.1",
+    "babel-preset-minify": "0.2.0",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-3": "6.24.1",
+    "eslint": "4.19.1",
+    "eslint-config-google": "0.9.1",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-compat": "2.2.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-prettier": "2.6.0",
+    "eslint-plugin-react": "7.8.2",
+    "prettier": "1.12.1",
+    "prop-types": "15.6.1",
+    "react": "16.3.2",
+    "webpack": "4.8.3",
+    "webpack-cli": "3.0.8"
   }
 }

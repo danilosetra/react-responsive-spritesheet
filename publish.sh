@@ -33,7 +33,7 @@ echo "START -> CURRENT VERSION: ${PACKAGE_VERSION}"
 echo " "
 
 echo "BUILD IN PROGRESS..."
-npm run build
+yarn build
 echo "DONE!"
 echo " "
 

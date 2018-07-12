@@ -1,21 +1,114 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { uniqueId } from 'lodash';
 
 class Spritesheet extends React.Component {
   constructor(props) {
     super(props);
+
+    this.id = uniqueId('react-responsive-spritesheet--');
+    this.spriteScale = 1;
   }
 
   componentDidMount() {
     this.init();
   }
 
-  init() {
-    console.log('lets start...');
-  }
+  renderElements = () => {
+    const {
+      image,
+      className,
+      style,
+      widthFrame,
+      heightFrame,
+      background,
+      backgroundSize,
+      backgroundRepeat,
+      backgroundPosition,
+      onClick,
+      onDoubleClick,
+      onMouseMove,
+      onMouseEnter,
+      onMouseLeave,
+      onMouseOver,
+      onMouseOut,
+      onMouseDown,
+      onMouseUp
+    } = this.props;
 
-  renderElements() {
-    return <div />;
+    const instance = this.setInstance();
+
+    let containerStyles = {
+      position: 'relative',
+      overflow: 'hidden',
+      width: `${widthFrame}px`,
+      height: `${heightFrame}px`,
+      transform: `scale(${this.spriteScale})`,
+      transformOrigin: '0 0',
+      backgroundImage: 'url(' + background + ')',
+      backgroundSize,
+      backgroundRepeat,
+      backgroundPosition
+    };
+
+    let moveStyles = {
+      overflow: 'hidden',
+      backgroundRepeat: 'no-repeat',
+      display: 'table-cell',
+      backgroundImage: 'url(' + image + ')',
+      width: `${widthFrame}px`,
+      height: `${heightFrame}px`,
+      transformOrigin: '0 50%'
+    };
+
+    let elMove = React.createElement('div', {
+      className: 'react-responsive-spritesheet-container__move',
+      style: moveStyles
+    });
+
+    let elContainer = React.createElement(
+      'div',
+      { className: 'react-responsive-spritesheet-container', style: containerStyles },
+      elMove
+    );
+
+    let elSprite = React.createElement(
+      'div',
+      {
+        className: `react-responsive-spritesheet ${this.id} ${className}`,
+        style,
+        onClick: () => onClick(instance),
+        onDoubleClick: () => onDoubleClick(instance),
+        onMouseMove: () => onMouseMove(instance),
+        onMouseEnter: () => onMouseEnter(instance),
+        onMouseLeave: () => onMouseLeave(instance),
+        onMouseOver: () => onMouseOver(instance),
+        onMouseOut: () => onMouseOut(instance),
+        onMouseDown: () => onMouseDown(instance),
+        onMouseUp: () => onMouseUp(instance)
+      },
+      elContainer
+    );
+
+    return elSprite;
+  };
+
+  init = () => {
+    console.log('lets start...');
+  };
+
+  setInstance() {
+    return {
+      play: () => {},
+      pause: () => {},
+      goToAndPlay: () => {},
+      goToAndPause: () => {},
+      setStartAt: () => {},
+      setEndAt: () => {},
+      setFps: () => {},
+      setDirection: () => {},
+      getInfo: () => {}
+    };
   }
 
   render() {

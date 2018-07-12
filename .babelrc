@@ -1,7 +1,4 @@
 {
   "presets": ["minify", "es2017", "stage-3", "react"],
-  "plugins": [
-    "transform-object-rest-spread",
-    "transform-react-jsx"
-  ]
+  "plugins": ["transform-object-rest-spread", "transform-class-properties", "transform-react-jsx"]
 }

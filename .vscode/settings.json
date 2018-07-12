@@ -1,0 +1,24 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "node_modules": true
+  },
+  "eslint.packageManager": "yarn",
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.run": "onSave",
+  "editor.formatOnSave": true,
+  "eslint.validate": ["javascript", "javascriptreact"],
+  "prettier.disableLanguages": ["js", "jsx"],
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "prettier.eslintIntegration": true
+}

@@ -60,7 +60,7 @@ class Spritesheet extends Component {
       height: `${heightFrame}px`,
       transform: `scale(${this.spriteScale})`,
       transformOrigin: '0 0',
-      backgroundImage: 'url(' + background + ')',
+      backgroundImage: `url(${background})`,
       backgroundSize,
       backgroundRepeat,
       backgroundPosition
@@ -70,7 +70,7 @@ class Spritesheet extends Component {
       overflow: 'hidden',
       backgroundRepeat: 'no-repeat',
       display: 'table-cell',
-      backgroundImage: 'url(' + image + ')',
+      backgroundImage: `url(${image})`,
       width: `${widthFrame}px`,
       height: `${heightFrame}px`,
       transformOrigin: '0 50%'
@@ -114,12 +114,12 @@ class Spritesheet extends Component {
     let imgLoadSprite = new Image();
     imgLoadSprite.src = image;
     imgLoadSprite.onload = () => {
-      if (document && document.querySelector('.' + this.id)) {
+      if (document && document.querySelector(`.${this.id}`)) {
         this.imageSprite = imgLoadSprite;
         this.cols = this.imageSprite.width === widthFrame ? 1 : this.imageSprite.width / widthFrame;
         this.rows = this.imageSprite.height === heightFrame ? 1 : this.imageSprite.height / heightFrame;
 
-        this.spriteEl = document.querySelector('.' + this.id);
+        this.spriteEl = document.querySelector(`.${this.id}`);
         this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
         this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
 

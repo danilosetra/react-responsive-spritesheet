@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 
-class Spritesheet extends React.Component {
+class Spritesheet extends Component {
   constructor(props) {
     super(props);
 
+    const { isResponsive, startAt, endAt, fps, steps, direction } = this.props;
+
     this.id = uniqueId('react-responsive-spritesheet--');
+    this.spriteEl = this.spriteElContainer = this.spriteElMove = this.imageSprite = this.cols = this.rows = null;
+    this.intervalSprite = false;
+    this.isResponsive = isResponsive;
+    this.startAt = this.setStartAt(startAt);
+    this.endAt = this.setEndAt(endAt);
+    this.fps = fps;
+    this.steps = steps;
+    this.completeLoopCicles = 0;
+    this.isPlaying = false;
     this.spriteScale = 1;
+    this.direction = this.setDirection(direction);
+    this.frame = this.startAt ? this.startAt : this.direction === 'rewind' ? this.steps - 1 : 0;
   }
 
   componentDidMount() {
@@ -103,13 +116,28 @@ class Spritesheet extends React.Component {
       pause: () => {},
       goToAndPlay: () => {},
       goToAndPause: () => {},
-      setStartAt: () => {},
-      setEndAt: () => {},
+      setStartAt: this.setStartAt,
+      setEndAt: this.setEndAt,
       setFps: () => {},
-      setDirection: () => {},
+      setDirection: this.setDirection,
       getInfo: () => {}
     };
   }
+
+  setStartAt = frame => {
+    this.startAt = frame ? frame - 1 : 0;
+    return this.startAt;
+  };
+
+  setEndAt = frame => {
+    this.endAt = frame;
+    return this.endAt;
+  };
+
+  setDirection = direction => {
+    this.direction = direction === 'rewind' ? 'rewind' : 'forward';
+    return this.direction;
+  };
 
   render() {
     return this.renderElements();

@@ -130,9 +130,7 @@ class Spritesheet extends Component {
           this.resize(false);
         }, 10);
 
-        if (autoplay !== false) {
-          this.play(true);
-        }
+        if (autoplay !== false) this.play(true);
 
         const instance = this.setInstance();
 
@@ -258,42 +256,30 @@ class Spritesheet extends Component {
 
   getInfo = param => {
     switch (param) {
-      case 'direction': {
+      case 'direction':
         return this.direction;
-      }
-      case 'frame': {
+      case 'frame':
         return this.frame;
-      }
-      case 'fps': {
+      case 'fps':
         return this.fps;
-      }
-      case 'steps': {
+      case 'steps':
         return this.steps;
-      }
-      case 'width': {
+      case 'width':
         return this.spriteElContainer.getBoundingClientRect().width;
-      }
-      case 'height': {
+      case 'height':
         return this.spriteElContainer.getBoundingClientRect().height;
-      }
-      case 'scale': {
+      case 'scale':
         return this.spriteScale;
-      }
-      case 'isPlaying': {
+      case 'isPlaying':
         return this.isPlaying;
-      }
-      case 'isPaused': {
+      case 'isPaused':
         return !this.isPlaying;
-      }
-      case 'completeLoopCicles': {
+      case 'completeLoopCicles':
         return this.completeLoopCicles;
-      }
-      default: {
+      default:
         throw new Error(
           `Invalid param \`${param}\` requested by Spritesheet.getinfo(). See the documentation on https://github.com/danilosetra/react-responsive-spritesheet`
         );
-        break;
-      }
     }
   };
 

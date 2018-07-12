@@ -1,5 +1,5 @@
-let path = require('path');
-let MinifyPlugin = require('babel-minify-webpack-plugin');
+const path = require('path');
+const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -9,7 +9,6 @@ module.exports = {
     filename: 'index.js',
     libraryTarget: 'commonjs2'
   },
-  plugins: [new MinifyPlugin({}, { comments: false })],
   module: {
     rules: [
       {
@@ -19,10 +18,22 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [['env', { modules: false }], 'stage-3', 'react']
+            presets: [['env', { modules: false }], 'es2017', 'stage-3', 'react'],
+            plugins: ['transform-object-rest-spread', 'transform-class-properties', 'transform-react-jsx']
           }
         }
       }
+    ]
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new UglifyJsWebpackPlugin({
+        test: /\.js($|\?)/i,
+        uglifyOptions: {
+          safari10: true
+        }
+      })
     ]
   },
   externals: {

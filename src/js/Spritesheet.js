@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { uniqueId } from 'lodash';
+import randomID from 'random-id';
 
 class Spritesheet extends Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class Spritesheet extends Component {
 
     const { isResponsive, startAt, endAt, fps, steps, direction } = this.props;
 
-    this.id = uniqueId('react-responsive-spritesheet--');
+    this.id = `react-responsive-spritesheet--${randomID(8)}`;
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.imageSprite = this.cols = this.rows = null;
     this.intervalSprite = false;
     this.isResponsive = isResponsive;

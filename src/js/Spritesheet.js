@@ -235,7 +235,7 @@ class Spritesheet extends Component {
   };
 
   setStartAt = frame => {
-    this.startAt = frame ? frame - 1 : 0;
+    this.startAt = frame ? frame : 0;
     return this.startAt;
   };
 

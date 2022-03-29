@@ -92,15 +92,15 @@ class Spritesheet extends Component {
       {
         className: `react-responsive-spritesheet ${this.id} ${className}`,
         style,
-        onClick: () => onClick(this.setInstance()),
-        onDoubleClick: () => onDoubleClick(this.setInstance()),
-        onMouseMove: () => onMouseMove(this.setInstance()),
-        onMouseEnter: () => onMouseEnter(this.setInstance()),
-        onMouseLeave: () => onMouseLeave(this.setInstance()),
-        onMouseOver: () => onMouseOver(this.setInstance()),
-        onMouseOut: () => onMouseOut(this.setInstance()),
-        onMouseDown: () => onMouseDown(this.setInstance()),
-        onMouseUp: () => onMouseUp(this.setInstance())
+        onClick: (e) => onClick(this.setInstance(), e),
+        onDoubleClick: (e) => onDoubleClick(this.setInstance(), e),
+        onMouseMove: (e) => onMouseMove(this.setInstance(), e),
+        onMouseEnter: (e) => onMouseEnter(this.setInstance(), e),
+        onMouseLeave: (e) => onMouseLeave(this.setInstance(), e),
+        onMouseOver: (e) => onMouseOver(this.setInstance(), e),
+        onMouseOut: (e) => onMouseOut(this.setInstance(), e),
+        onMouseDown: (e) => onMouseDown(this.setInstance(), e),
+        onMouseUp: (e) => onMouseUp(this.setInstance(), e)
       },
       elContainer
     );

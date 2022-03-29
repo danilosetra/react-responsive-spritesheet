@@ -96,35 +96,38 @@ class App extends Component {
         getInstance={spritesheet => {
           this.spriteInstance = spritesheet;
         }}
-        onClick={spritesheet => {
+        onClick={(spritesheet, e) => {
           spritesheet.play();
         }}
-        onDoubleClick={spritesheet => {
+        onDoubleClick={(spritesheet, e) => {
           console.log( spritesheet.getInfo('isPlaying') );
         }}
-        onMouseMove={spritesheet => {
+        onMouseMove={(spritesheet, e) => {
           console.log( 'onMouseMove', spritesheet.getInfo('frame') );
         }}
-        onMouseEnter={spritesheet => {
+        onMouseEnter={(spritesheet, e) => {
           console.log('onMouseEnter');
         }}
-        onMouseLeave={spritesheet => {
+        onMouseLeave={(spritesheet, e) => {
           console.log('onMouseLeave');
         }}
-        onMouseOver={spritesheet => {
+        onMouseOver={(spritesheet, e) => {
           console.log('onMouseOver');
         }}
-        onMouseOut={spritesheet => {
+        onMouseOut={(spritesheet, e) => {
           console.log('onMouseOut');
         }}
-        onMouseDown={spritesheet => {
+        onMouseDown={(spritesheet, e) => {
           console.log('onMouseDown');
         }}
-        onMouseUp={spritesheet => {
+        onMouseUp={(spritesheet, e) => {
           console.log('onMouseUp');
         }}
         onInit={spritesheet => {
           console.log('onInit');
+        }}
+        onError={(spritesheet, message) => {
+          console.log('onError', message);
         }}
         onResize={spritesheet => {
           console.log( 'onResize', spritesheet.getInfo('frame') );

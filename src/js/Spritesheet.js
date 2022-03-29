@@ -140,7 +140,7 @@ class Spritesheet extends Component {
     };
 
     imgLoadSprite.onerror = () => {
-      throw new Error(`Failed to load image ${imgLoadSprite.src}`);
+      onError(instance, `Failed to load image ${imgLoadSprite.src}`);
     };
   };
 
@@ -332,6 +332,7 @@ Spritesheet.propTypes = {
   onMouseDown: PropTypes.func,
   onMouseUp: PropTypes.func,
   onInit: PropTypes.func,
+  onError: PropTypes.func,
   onResize: PropTypes.oneOfType([PropTypes.oneOf([false]), PropTypes.func]),
   onPlay: PropTypes.func,
   onPause: PropTypes.func,
@@ -365,6 +366,7 @@ Spritesheet.defaultProps = {
   onMouseDown: () => {},
   onMouseUp: () => {},
   onInit: () => {},
+  onError: () => {},
   onResize: false,
   onPlay: () => {},
   onPause: () => {},

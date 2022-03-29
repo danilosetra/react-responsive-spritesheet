@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import randomID from 'random-id';
 
 class Spritesheet extends Component {
   constructor(props) {
@@ -8,7 +7,7 @@ class Spritesheet extends Component {
 
     const { isResponsive, startAt, endAt, fps, steps, direction } = this.props;
 
-    this.id = `react-responsive-spritesheet--${randomID(8)}`;
+    this.id = `react-responsive-spritesheet--${Math.random().toString(16).slice(2)}`;
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.imageSprite = this.cols = this.rows = null;
     this.intervalSprite = false;
     this.isResponsive = isResponsive;

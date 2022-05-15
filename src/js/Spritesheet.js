@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import randomID from 'random-id';
 
 class Spritesheet extends Component {
   constructor(props) {
@@ -8,7 +7,7 @@ class Spritesheet extends Component {
 
     const { isResponsive, startAt, endAt, fps, steps, direction } = this.props;
 
-    this.id = `react-responsive-spritesheet--${randomID(8)}`;
+    this.id = `react-responsive-spritesheet--${Math.random().toString(16).slice(2)}`;
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.imageSprite = this.cols = this.rows = null;
     this.intervalSprite = false;
     this.isResponsive = isResponsive;
@@ -92,15 +91,15 @@ class Spritesheet extends Component {
       {
         className: `react-responsive-spritesheet ${this.id} ${className}`,
         style,
-        onClick: () => onClick(this.setInstance()),
-        onDoubleClick: () => onDoubleClick(this.setInstance()),
-        onMouseMove: () => onMouseMove(this.setInstance()),
-        onMouseEnter: () => onMouseEnter(this.setInstance()),
-        onMouseLeave: () => onMouseLeave(this.setInstance()),
-        onMouseOver: () => onMouseOver(this.setInstance()),
-        onMouseOut: () => onMouseOut(this.setInstance()),
-        onMouseDown: () => onMouseDown(this.setInstance()),
-        onMouseUp: () => onMouseUp(this.setInstance())
+        onClick: (e) => onClick(this.setInstance(), e),
+        onDoubleClick: (e) => onDoubleClick(this.setInstance(), e),
+        onMouseMove: (e) => onMouseMove(this.setInstance(), e),
+        onMouseEnter: (e) => onMouseEnter(this.setInstance(), e),
+        onMouseLeave: (e) => onMouseLeave(this.setInstance(), e),
+        onMouseOver: (e) => onMouseOver(this.setInstance(), e),
+        onMouseOut: (e) => onMouseOut(this.setInstance(), e),
+        onMouseDown: (e) => onMouseDown(this.setInstance(), e),
+        onMouseUp: (e) => onMouseUp(this.setInstance(), e)
       },
       elContainer
     );
@@ -140,7 +139,7 @@ class Spritesheet extends Component {
     };
 
     imgLoadSprite.onerror = () => {
-      throw new Error(`Failed to load image ${imgLoadSprite.src}`);
+      onError(instance, `Failed to load image ${imgLoadSprite.src}`);
     };
   };
 
@@ -332,6 +331,7 @@ Spritesheet.propTypes = {
   onMouseDown: PropTypes.func,
   onMouseUp: PropTypes.func,
   onInit: PropTypes.func,
+  onError: PropTypes.func,
   onResize: PropTypes.oneOfType([PropTypes.oneOf([false]), PropTypes.func]),
   onPlay: PropTypes.func,
   onPause: PropTypes.func,
@@ -365,6 +365,7 @@ Spritesheet.defaultProps = {
   onMouseDown: () => {},
   onMouseUp: () => {},
   onInit: () => {},
+  onError: () => {},
   onResize: false,
   onPlay: () => {},
   onPause: () => {},

@@ -16,6 +16,9 @@ while true; do
     esac
 done
 
+# NPM Login
+npm adduser
+
 # Version key/value should be on his own line
 PACKAGE_VERSION=$(cat package.json \
   | grep version \

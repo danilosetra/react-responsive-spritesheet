@@ -18,7 +18,7 @@ const legacy = {
     },
     requireConfigFile: false,
     babelOptions: {
-      presets: ['@babel/preset-env', '@babel/preset-react']
+      presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
     }
   },
   env: {
@@ -109,6 +109,21 @@ const sanitizedLegacy = {
 
 module.exports = [
   ...compat.config(sanitizedLegacy),
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: require('@babel/eslint-parser'),
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
+        requireConfigFile: false,
+        babelOptions: {
+          presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
+        }
+      }
+    }
+  },
   {
     ignores: ['build/', '/src/js/Spritesheet.old.js']
   }

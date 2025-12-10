@@ -1,16 +1,70 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import randomID from 'random-id';
+import React, { Component } from 'react';
+import type * as T from '../types/spritesheet';
 
-class Spritesheet extends Component {
-  constructor(props) {
+class Spritesheet extends Component<T.SpritesheetProps> {
+  static defaultProps: Partial<T.SpritesheetProps> = {
+    className: '',
+    style: {},
+    isResponsive: true,
+    direction: 'forward' as T.Direction,
+    timeout: 0,
+    autoplay: true,
+    loop: false,
+    startAt: 0,
+    endAt: false,
+    background: '',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: '',
+    getInstance: () => {},
+    onClick: () => {},
+    onDoubleClick: () => {},
+    onMouseMove: () => {},
+    onMouseEnter: () => {},
+    onMouseLeave: () => {},
+    onMouseOver: () => {},
+    onMouseOut: () => {},
+    onMouseDown: () => {},
+    onMouseUp: () => {},
+    onInit: () => {},
+    onResize: false,
+    onPlay: () => {},
+    onPause: () => {},
+    onLoopComplete: false,
+    onEachFrame: false,
+    onEnterFrame: false
+  };
+  id: string;
+  spriteEl: HTMLDivElement | null;
+  spriteElContainer: HTMLDivElement | null;
+  spriteElMove: HTMLDivElement | null;
+  imageSprite: HTMLImageElement | null;
+  cols: number | null;
+  rows: number | null;
+  intervalSprite?: number;
+  isResponsive: boolean;
+  startAt: number;
+  endAt: number | false;
+  fps: number;
+  steps: number;
+  completeLoopCicles: number;
+  isPlaying: boolean;
+  spriteScale: number;
+  direction: T.Direction;
+  frame: number;
+  private handleWindowResize: () => void;
+
+  constructor(props: T.SpritesheetProps) {
     super(props);
 
-    const { isResponsive, startAt, endAt, fps, steps, direction } = this.props;
+    const { isResponsive = true, startAt = 0, endAt = false, fps, steps, direction = 'forward' } = this.props;
 
     this.id = `react-responsive-spritesheet--${randomID(8)}`;
-    this.spriteEl = this.spriteElContainer = this.spriteElMove = this.imageSprite = this.cols = this.rows = null;
-    this.intervalSprite = false;
+    this.spriteEl = this.spriteElContainer = this.spriteElMove = this.imageSprite = null;
+    this.cols = this.rows = null;
+    this.intervalSprite = undefined;
     this.isResponsive = isResponsive;
     this.startAt = this.setStartAt(startAt);
     this.endAt = this.setEndAt(endAt);
@@ -21,6 +75,7 @@ class Spritesheet extends Component {
     this.spriteScale = 1;
     this.direction = this.setDirection(direction);
     this.frame = this.startAt ? this.startAt : this.direction === 'rewind' ? this.steps - 1 : 0;
+    this.handleWindowResize = () => this.resize();
   }
 
   componentDidMount() {
@@ -28,32 +83,32 @@ class Spritesheet extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
+    window.removeEventListener('resize', this.handleWindowResize);
   }
 
-  renderElements = () => {
+  renderElements = (): React.ReactElement => {
     const {
       image,
-      className,
-      style,
+      className = '',
+      style = {},
       widthFrame,
       heightFrame,
-      background,
-      backgroundSize,
-      backgroundRepeat,
-      backgroundPosition,
-      onClick,
-      onDoubleClick,
-      onMouseMove,
-      onMouseEnter,
-      onMouseLeave,
-      onMouseOver,
-      onMouseOut,
-      onMouseDown,
-      onMouseUp
+      background = '',
+      backgroundSize = 'cover',
+      backgroundRepeat = 'no-repeat',
+      backgroundPosition = '',
+      onClick = () => {},
+      onDoubleClick = () => {},
+      onMouseMove = () => {},
+      onMouseEnter = () => {},
+      onMouseLeave = () => {},
+      onMouseOver = () => {},
+      onMouseOut = () => {},
+      onMouseDown = () => {},
+      onMouseUp = () => {}
     } = this.props;
 
-    const containerStyles = {
+    const containerStyles: React.CSSProperties = {
       position: 'relative',
       overflow: 'hidden',
       width: `${widthFrame}px`,
@@ -66,7 +121,7 @@ class Spritesheet extends Component {
       backgroundPosition
     };
 
-    const moveStyles = {
+    const moveStyles: React.CSSProperties = {
       overflow: 'hidden',
       backgroundRepeat: 'no-repeat',
       display: 'table-cell',
@@ -108,11 +163,11 @@ class Spritesheet extends Component {
       elContainer
     );
 
-    return elSprite;
+    return elSprite as unknown as React.ReactElement;
   };
 
-  init = () => {
-    const { image, widthFrame, heightFrame, autoplay, getInstance, onInit } = this.props;
+  init = (): void => {
+    const { image, widthFrame, heightFrame, autoplay = true, getInstance = () => {}, onInit = () => {} } = this.props;
 
     const imgLoadSprite = new Image();
     imgLoadSprite.src = image;
@@ -123,11 +178,15 @@ class Spritesheet extends Component {
         this.rows = this.imageSprite.height === heightFrame ? 1 : this.imageSprite.height / heightFrame;
 
         this.spriteEl = document.querySelector(`.${this.id}`);
-        this.spriteElContainer = this.spriteEl.querySelector('.react-responsive-spritesheet-container');
-        this.spriteElMove = this.spriteElContainer.querySelector('.react-responsive-spritesheet-container__move');
+        this.spriteElContainer = this.spriteEl!.querySelector(
+          '.react-responsive-spritesheet-container'
+        ) as HTMLDivElement;
+        this.spriteElMove = this.spriteElContainer!.querySelector(
+          '.react-responsive-spritesheet-container__move'
+        ) as HTMLDivElement;
 
         this.resize(false);
-        window.addEventListener('resize', this.resize);
+        window.addEventListener('resize', this.handleWindowResize);
         this.moveImage(false);
         setTimeout(() => {
           this.resize(false);
@@ -147,19 +206,19 @@ class Spritesheet extends Component {
     };
   };
 
-  resize = (callback = true) => {
+  resize = (callback: boolean = true): void => {
     const { widthFrame, onResize } = this.props;
 
-    if (this.isResponsive) {
+    if (this.isResponsive && this.spriteEl && this.spriteElContainer) {
       this.spriteScale = this.spriteEl.offsetWidth / widthFrame;
       this.spriteElContainer.style.transform = `scale(${this.spriteScale})`;
       this.spriteEl.style.height = `${this.getInfo('height')}px`;
-      if (callback && onResize) onResize(this.setInstance());
+      if (callback && typeof onResize === 'function') onResize(this.setInstance());
     }
   };
 
-  play = (withTimeout = false) => {
-    const { onPlay, timeout } = this.props;
+  play = (withTimeout: boolean = false): void => {
+    const { onPlay = () => {}, timeout = 0 } = this.props;
 
     if (!this.isPlaying) {
       setTimeout(
@@ -173,24 +232,24 @@ class Spritesheet extends Component {
     }
   };
 
-  setIntervalPlayFunctions = () => {
+  setIntervalPlayFunctions = (): void => {
     if (this.intervalSprite) clearInterval(this.intervalSprite);
-    this.intervalSprite = setInterval(() => {
+    this.intervalSprite = window.setInterval(() => {
       if (this.isPlaying) this.moveImage();
     }, 1000 / this.fps);
   };
 
-  moveImage = (play = true) => {
-    const { onEnterFrame, onEachFrame, loop, onLoopComplete } = this.props;
+  moveImage = (play: boolean = true): void => {
+    const { onEnterFrame, onEachFrame, loop = false, onLoopComplete } = this.props;
 
-    const currentRow = Math.floor(this.frame / this.cols);
-    const currentCol = this.frame - this.cols * currentRow;
-    this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * currentCol}px -${
+    const currentRow = Math.floor(this.frame / (this.cols || 1));
+    const currentCol = this.frame - (this.cols || 1) * currentRow;
+    this.spriteElMove!.style.backgroundPosition = `-${this.props.widthFrame * currentCol}px -${
       this.props.heightFrame * currentRow
     }px`;
 
-    if (onEnterFrame) {
-      onEnterFrame.map((frameAction, i) => {
+    if (onEnterFrame && Array.isArray(onEnterFrame)) {
+      onEnterFrame.map(frameAction => {
         if (frameAction.frame === this.frame && frameAction.callback) {
           frameAction.callback();
         }
@@ -203,7 +262,7 @@ class Spritesheet extends Component {
       } else {
         this.frame += 1;
       }
-      if (onEachFrame) onEachFrame(this.setInstance());
+      if (typeof onEachFrame === 'function') onEachFrame(this.setInstance());
     }
 
     if (this.isPlaying) {
@@ -212,7 +271,7 @@ class Spritesheet extends Component {
         (this.direction === 'rewind' && (this.frame === -1 || this.frame === this.endAt))
       ) {
         if (loop) {
-          if (onLoopComplete) onLoopComplete(this.setInstance());
+          if (typeof onLoopComplete === 'function') onLoopComplete(this.setInstance());
           this.completeLoopCicles += 1;
           this.frame = this.startAt ? this.startAt : this.direction === 'rewind' ? this.steps - 1 : 0;
         } else {
@@ -222,46 +281,46 @@ class Spritesheet extends Component {
     }
   };
 
-  pause = () => {
-    const { onPause } = this.props;
+  pause = (): void => {
+    const { onPause = () => {} } = this.props;
 
     this.isPlaying = false;
-    clearInterval(this.intervalSprite);
+    if (this.intervalSprite) clearInterval(this.intervalSprite);
     onPause(this.setInstance());
   };
 
-  goToAndPlay = (frame) => {
-    this.frame = frame ? frame : this.frame;
+  goToAndPlay = (frame?: number): void => {
+    this.frame = frame !== undefined ? frame : this.frame;
     this.play();
   };
 
-  goToAndPause = (frame) => {
+  goToAndPause = (frame?: number): void => {
     this.pause();
-    this.frame = frame ? frame : this.frame;
+    this.frame = frame !== undefined ? frame : this.frame;
     this.moveImage();
   };
 
-  setStartAt = (frame) => {
+  setStartAt = (frame?: number): number => {
     this.startAt = frame ? frame - 1 : 0;
     return this.startAt;
   };
 
-  setEndAt = (frame) => {
-    this.endAt = frame;
+  setEndAt = (frame?: number | false): number | false => {
+    this.endAt = frame === undefined ? false : frame;
     return this.endAt;
   };
 
-  setFps(fps) {
+  setFps(fps: number): void {
     this.fps = fps;
     this.setIntervalPlayFunctions();
   }
 
-  setDirection = (direction) => {
+  setDirection = (direction?: T.Direction): T.Direction => {
     this.direction = direction === 'rewind' ? 'rewind' : 'forward';
     return this.direction;
   };
 
-  getInfo = (param) => {
+  getInfo = (param: string): any => {
     switch (param) {
       case 'direction':
         return this.direction;
@@ -272,9 +331,9 @@ class Spritesheet extends Component {
       case 'steps':
         return this.steps;
       case 'width':
-        return this.spriteElContainer.getBoundingClientRect().width;
+        return this.spriteElContainer!.getBoundingClientRect().width;
       case 'height':
-        return this.spriteElContainer.getBoundingClientRect().height;
+        return this.spriteElContainer!.getBoundingClientRect().height;
       case 'scale':
         return this.spriteScale;
       case 'isPlaying':
@@ -290,7 +349,7 @@ class Spritesheet extends Component {
     }
   };
 
-  setInstance() {
+  setInstance(): T.SpritesheetInstance {
     return {
       play: this.play,
       pause: this.pause,
@@ -298,7 +357,7 @@ class Spritesheet extends Component {
       goToAndPause: this.goToAndPause,
       setStartAt: this.setStartAt,
       setEndAt: this.setEndAt,
-      setFps: this.setFps,
+      setFps: this.setFps.bind(this),
       setDirection: this.setDirection,
       getInfo: this.getInfo
     };
@@ -345,39 +404,6 @@ Spritesheet.propTypes = {
   onLoopComplete: PropTypes.oneOfType([PropTypes.oneOf([false]), PropTypes.func]),
   onEachFrame: PropTypes.oneOfType([PropTypes.oneOf([false]), PropTypes.func]),
   onEnterFrame: PropTypes.oneOfType([PropTypes.oneOf([false]), PropTypes.array])
-};
-
-Spritesheet.defaultProps = {
-  className: '',
-  style: {},
-  isResponsive: true,
-  direction: 'forward',
-  timeout: 0,
-  autoplay: true,
-  loop: false,
-  startAt: 0,
-  endAt: false,
-  background: '',
-  backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: '',
-  getInstance: () => {},
-  onClick: () => {},
-  onDoubleClick: () => {},
-  onMouseMove: () => {},
-  onMouseEnter: () => {},
-  onMouseLeave: () => {},
-  onMouseOver: () => {},
-  onMouseOut: () => {},
-  onMouseDown: () => {},
-  onMouseUp: () => {},
-  onInit: () => {},
-  onResize: false,
-  onPlay: () => {},
-  onPause: () => {},
-  onLoopComplete: false,
-  onEachFrame: false,
-  onEnterFrame: false
 };
 
 export default Spritesheet;

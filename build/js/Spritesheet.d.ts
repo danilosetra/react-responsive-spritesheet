@@ -1,45 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import type * as T from '../types/spritesheet';
-declare class Spritesheet extends Component<T.SpritesheetProps> {
-    static defaultProps: Partial<T.SpritesheetProps>;
-    id: string;
-    spriteEl: HTMLDivElement | null;
-    spriteElContainer: HTMLDivElement | null;
-    spriteElMove: HTMLDivElement | null;
-    imageSprite: HTMLImageElement | null;
-    cols: number | null;
-    rows: number | null;
-    intervalSprite?: number;
-    isResponsive: boolean;
-    startAt: number;
-    endAt: number | false;
-    fps: number;
-    steps: number;
-    completeLoopCicles: number;
-    isPlaying: boolean;
-    spriteScale: number;
-    direction: T.Direction;
-    frame: number;
-    private handleWindowResize;
-    constructor(props: T.SpritesheetProps);
-    componentDidMount(): void;
-    componentWillUnmount(): void;
-    renderElements: () => React.ReactElement;
-    init: () => void;
-    resize: (callback?: boolean) => void;
-    play: (withTimeout?: boolean) => void;
-    setIntervalPlayFunctions: () => void;
-    moveImage: (play?: boolean) => void;
-    pause: () => void;
-    goToAndPlay: (frame?: number) => void;
-    goToAndPause: (frame?: number) => void;
-    setStartAt: (frame?: number) => number;
-    setEndAt: (frame?: number | false) => number | false;
-    setFps(fps: number): void;
-    setDirection: (direction?: T.Direction) => T.Direction;
-    getInfo: (param: string) => any;
-    setInstance(): T.SpritesheetInstance;
-    render(): React.ReactElement<unknown, string | React.JSXElementConstructor<any>>;
-}
+declare const Spritesheet: React.ForwardRefExoticComponent<T.SpritesheetProps & React.RefAttributes<T.SpritesheetInstance>>;
 export default Spritesheet;
 //# sourceMappingURL=Spritesheet.d.ts.map

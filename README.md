@@ -14,6 +14,7 @@ React Responsive Spritesheet is a [React](https://facebook.github.io/react/) com
 - [Options](#options)
 - [Call methods](#call-methods)
 - [Requesting infos](#requesting-infos)
+- [ForwardRef usage](#forwardref-usage)
 - [Examples](#examples)
 
 ----------
@@ -388,5 +389,114 @@ Using background image
   backgroundPosition={`center center`}
 />
 ```
+
+----------
+
+## ForwardRef usage
+
+You can control the spritesheet instance directly using a React ref. The component supports `forwardRef`, so `ref.current` exposes the same instance methods available in callbacks.
+
+**JavaScript (function component)**
+
+```jsx
+import React, { useRef } from 'react';
+import Spritesheet from 'react-responsive-spritesheet';
+
+export default function Example() {
+  const spriteRef = useRef(null);
+
+  return (
+    <div>
+      <Spritesheet
+        ref={spriteRef}
+        image={`https://raw.githubusercontent.com/danilosetra/react-responsive-spritesheet/master/assets/images/examples/sprite-image-horizontal.png`}
+        widthFrame={420}
+        heightFrame={500}
+        steps={14}
+        fps={10}
+        autoplay={false}
+        loop={true}
+      />
+
+      <button onClick={() => spriteRef.current && spriteRef.current.play()}>play</button>
+      <button onClick={() => spriteRef.current && spriteRef.current.pause()}>pause</button>
+      <button onClick={() => spriteRef.current && spriteRef.current.goToAndPlay(5)}>go to 5 & play</button>
+    </div>
+  );
+}
+```
+
+**TypeScript (function component, typed ref)**
+
+```tsx
+import React, { useRef } from 'react';
+import Spritesheet from 'react-responsive-spritesheet';
+
+type SpritesheetRef = React.ComponentRef<typeof Spritesheet>;
+
+export default function ExampleTs() {
+  const spriteRef = useRef<SpritesheetRef>(null);
+
+  const handleToggle = () => {
+    if (!spriteRef.current) return;
+    const isPlaying = spriteRef.current.getInfo('isPlaying');
+    isPlaying ? spriteRef.current.pause() : spriteRef.current.play();
+  };
+
+  return (
+    <div>
+      <Spritesheet
+        ref={spriteRef}
+        image={`https://raw.githubusercontent.com/danilosetra/react-responsive-spritesheet/master/assets/images/examples/sprite-image-horizontal.png`}
+        widthFrame={420}
+        heightFrame={500}
+        steps={14}
+        fps={10}
+        autoplay={false}
+        loop={true}
+      />
+
+      <button onClick={handleToggle}>toggle play/pause</button>
+      <button onClick={() => spriteRef.current?.setDirection('rewind')}>rewind</button>
+      <button onClick={() => spriteRef.current?.setFps(24)}>set fps to 24</button>
+    </div>
+  );
+}
+```
+
+**Class component**
+
+```jsx
+import React from 'react';
+import Spritesheet from 'react-responsive-spritesheet';
+
+class ExampleClass extends React.Component {
+  spriteRef = React.createRef();
+
+  render() {
+    return (
+      <div>
+        <Spritesheet
+          ref={this.spriteRef}
+          image={`https://raw.githubusercontent.com/danilosetra/react-responsive-spritesheet/master/assets/images/examples/sprite-image-horizontal.png`}
+          widthFrame={420}
+          heightFrame={500}
+          steps={14}
+          fps={10}
+          autoplay={false}
+          loop={true}
+        />
+
+        <button onClick={() => this.spriteRef.current && this.spriteRef.current.play()}>play</button>
+        <button onClick={() => this.spriteRef.current && this.spriteRef.current.pause()}>pause</button>
+      </div>
+    );
+  }
+}
+```
+
+Notes:
+- The ref exposes methods like `play`, `pause`, `goToAndPlay`, `goToAndPause`, `setStartAt`, `setEndAt`, `setFps`, `setDirection`, and `getInfo`.
+- `getInstance` continues to work; choose either `ref` or `getInstance` based on your preference.
 
 ----------

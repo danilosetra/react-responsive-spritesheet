@@ -26,7 +26,7 @@ React Responsive Spritesheet is a [React](https://facebook.github.io/react/) com
 - The animation can be rewinded with **setDirection()** method and/or with **direction** parameter;
 - Direction information is provided by **getInfo()** method;
 
-For previous versions, see our [release history](https://github.com/danilosetra/react-responsive-spritesheet/releases)
+For previous versions, see our [release tags](https://github.com/danilosetra/react-responsive-spritesheet/tags)
 
 ----------
 

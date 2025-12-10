@@ -2,15 +2,21 @@
   "extends": ["google", "plugin:prettier/recommended", "plugin:react/recommended"],
   "plugins": ["prettier", "jsx-a11y", "compat", "react"],
   "settings": {
-    "polyfills": ["fetch", "promises"]
+    "polyfills": ["fetch", "promises"],
+    "react": {
+      "version": "detect"
+    }
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
-    "ecmaVersion": 8,
+    "ecmaVersion": 2021,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true,
-      "experimentalObjectRestSpread": true
+      "jsx": true
+    },
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-env", "@babel/preset-react"]
     }
   },
   "env": {

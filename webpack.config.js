@@ -1,5 +1,5 @@
 const path = require('path');
-const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -15,22 +15,15 @@ module.exports = {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src/js'),
         exclude: /(node_modules|bower_components|build)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [['env', { modules: false }], 'es2017', 'stage-3', 'react'],
-            plugins: ['transform-object-rest-spread', 'transform-class-properties', 'transform-react-jsx']
-          }
-        }
+        use: 'babel-loader'
       }
     ]
   },
   optimization: {
     minimize: true,
     minimizer: [
-      new UglifyJsWebpackPlugin({
-        test: /\.js($|\?)/i,
-        uglifyOptions: {
+      new TerserPlugin({
+        terserOptions: {
           safari10: true
         }
       })

@@ -17,11 +17,10 @@
     "**/package-lock.json": true
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "editor.formatOnSave": true,
   "eslint.alwaysShowStatus": true,
-  "eslint.packageManager": "npm",
   "eslint.run": "onSave",
   "eslint.validate": [
     "javascript",

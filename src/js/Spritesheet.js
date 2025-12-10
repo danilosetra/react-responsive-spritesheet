@@ -53,7 +53,7 @@ class Spritesheet extends Component {
       onMouseUp
     } = this.props;
 
-    let containerStyles = {
+    const containerStyles = {
       position: 'relative',
       overflow: 'hidden',
       width: `${widthFrame}px`,
@@ -66,7 +66,7 @@ class Spritesheet extends Component {
       backgroundPosition
     };
 
-    let moveStyles = {
+    const moveStyles = {
       overflow: 'hidden',
       backgroundRepeat: 'no-repeat',
       display: 'table-cell',
@@ -76,18 +76,21 @@ class Spritesheet extends Component {
       transformOrigin: '0 50%'
     };
 
-    let elMove = React.createElement('div', {
+    const elMove = React.createElement('div', {
       className: 'react-responsive-spritesheet-container__move',
       style: moveStyles
     });
 
-    let elContainer = React.createElement(
+    const elContainer = React.createElement(
       'div',
-      { className: 'react-responsive-spritesheet-container', style: containerStyles },
+      {
+        className: 'react-responsive-spritesheet-container',
+        style: containerStyles
+      },
       elMove
     );
 
-    let elSprite = React.createElement(
+    const elSprite = React.createElement(
       'div',
       {
         className: `react-responsive-spritesheet ${this.id} ${className}`,
@@ -111,7 +114,7 @@ class Spritesheet extends Component {
   init = () => {
     const { image, widthFrame, heightFrame, autoplay, getInstance, onInit } = this.props;
 
-    let imgLoadSprite = new Image();
+    const imgLoadSprite = new Image();
     imgLoadSprite.src = image;
     imgLoadSprite.onload = () => {
       if (document && document.querySelector(`.${this.id}`)) {
@@ -159,11 +162,14 @@ class Spritesheet extends Component {
     const { onPlay, timeout } = this.props;
 
     if (!this.isPlaying) {
-      setTimeout(() => {
-        onPlay(this.setInstance());
-        this.setIntervalPlayFunctions();
-        this.isPlaying = true;
-      }, withTimeout ? timeout : 0);
+      setTimeout(
+        () => {
+          onPlay(this.setInstance());
+          this.setIntervalPlayFunctions();
+          this.isPlaying = true;
+        },
+        withTimeout ? timeout : 0
+      );
     }
   };
 
@@ -177,10 +183,11 @@ class Spritesheet extends Component {
   moveImage = (play = true) => {
     const { onEnterFrame, onEachFrame, loop, onLoopComplete } = this.props;
 
-    let currentRow = Math.floor(this.frame / this.cols);
-    let currentCol = this.frame - this.cols * currentRow;
-    this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * currentCol}px -${this.props.heightFrame *
-      currentRow}px`;
+    const currentRow = Math.floor(this.frame / this.cols);
+    const currentCol = this.frame - this.cols * currentRow;
+    this.spriteElMove.style.backgroundPosition = `-${this.props.widthFrame * currentCol}px -${
+      this.props.heightFrame * currentRow
+    }px`;
 
     if (onEnterFrame) {
       onEnterFrame.map((frameAction, i) => {
@@ -223,23 +230,23 @@ class Spritesheet extends Component {
     onPause(this.setInstance());
   };
 
-  goToAndPlay = frame => {
+  goToAndPlay = (frame) => {
     this.frame = frame ? frame : this.frame;
     this.play();
   };
 
-  goToAndPause = frame => {
+  goToAndPause = (frame) => {
     this.pause();
     this.frame = frame ? frame : this.frame;
     this.moveImage();
   };
 
-  setStartAt = frame => {
+  setStartAt = (frame) => {
     this.startAt = frame ? frame - 1 : 0;
     return this.startAt;
   };
 
-  setEndAt = frame => {
+  setEndAt = (frame) => {
     this.endAt = frame;
     return this.endAt;
   };
@@ -249,12 +256,12 @@ class Spritesheet extends Component {
     this.setIntervalPlayFunctions();
   }
 
-  setDirection = direction => {
+  setDirection = (direction) => {
     this.direction = direction === 'rewind' ? 'rewind' : 'forward';
     return this.direction;
   };
 
-  getInfo = param => {
+  getInfo = (param) => {
     switch (param) {
       case 'direction':
         return this.direction;

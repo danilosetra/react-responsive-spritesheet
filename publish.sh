@@ -58,8 +58,19 @@ npm version $PATCH_TYPE
 echo "DONE! "
 echo " "
 
+read -p "Enter npm 2FA OTP code (from your authenticator app, leave blank if none): " NPM_OTP
+
 echo "PUBLISHING..."
-npm publish
+if [ -z "$NPM_OTP" ]; then
+  npm publish
+else
+  npm publish --otp=$NPM_OTP
+fi
+
+if [ $? -ne 0 ]; then
+  echo "npm publish failed! Aborting before pushing to git."
+  exit 1
+fi
 echo "DONE! "
 echo " "
 

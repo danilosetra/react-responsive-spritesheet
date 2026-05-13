@@ -1,9 +1,7 @@
-import randomID from 'random-id';
 import React, { useEffect, useImperativeHandle, useRef } from 'react';
 import type * as T from '../types/spritesheet';
 
 const Spritesheet = React.forwardRef<T.SpritesheetInstance, T.SpritesheetProps>((props, ref) => {
-  const idRef = useRef(`react-responsive-spritesheet--${randomID(8)}`);
   const spriteElRef = useRef<HTMLDivElement | null>(null);
   const spriteElContainerRef = useRef<HTMLDivElement | null>(null);
   const spriteElMoveRef = useRef<HTMLDivElement | null>(null);
@@ -303,7 +301,7 @@ const Spritesheet = React.forwardRef<T.SpritesheetInstance, T.SpritesheetProps>(
 
   return (
     <div
-      className={`react-responsive-spritesheet ${idRef.current} ${className}`}
+      className={`react-responsive-spritesheet ${className}`.trim()}
       style={style}
       ref={spriteElRef}
       onClick={() => onClick(instanceRef.current!)}
